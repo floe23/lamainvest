@@ -1,0 +1,73 @@
+#defaultKeyStatistics profitMargins
+#defaultKeyStatistics sharesOutstanding
+#defaultKeyStatistics 52WeekChange
+#recommendationTrend trend [0]
+#financialData returnOnEquity raw
+
+
+interesting?
+defaultKeyStatistics
+    sharesShortPriorMonth
+    fiveYearAverageReturn
+    morningStarRiskRating
+    revenueQuarterlyGrowth
+    annualReportExpenseRatio
+    lastDividendValue
+    SandP52WeekChange
+    threeYearAverageReturn
+    morningStarOverallRating
+    earningsQuarterlyGrowth
+    priceToSalesTrailing12Months
+    sharesShortPriorMonth
+    fiveYearAverageReturn
+
+recommendationTrend
+
+"earnings":{
+  "earningsDate":[
+
+  ],
+  "earningsAverage":{
+  "raw":0,
+  "fmt":"0.00"
+  },
+  "earningsLow":{
+  "raw":-0.08,
+  "fmt":"-0.08"
+  },
+  "earningsHigh":{
+  "raw":0.05,
+  "fmt":"0.05"
+  },
+  "revenueAverage":{
+  "raw":70040000,
+  "fmt":"70.04M",
+  "longFmt":"70,040,000"
+  },
+  "revenueLow":{
+  "raw":65000000,
+  "fmt":"65M",
+  "longFmt":"65,000,000"
+  },
+  "revenueHigh":{
+  "raw":77840000,
+  "fmt":"77.84M",
+  "longFmt":"77,840,000"
+  }
+  },
+
+  price
+  netSharePurchaseActivity
+  financialData
+
+  quoteType market
+
+  calendarEvents
+
+  summaryDetail
+
+
+  get-histories chart result [0] meta firstTradeDate
+
+
+  price regularMarketPrice
