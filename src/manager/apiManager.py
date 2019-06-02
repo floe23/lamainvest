@@ -1,4 +1,3 @@
-import unirest
 import json
 import requests
 

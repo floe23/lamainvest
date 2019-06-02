@@ -30,3 +30,4 @@ def test_getKeyData(startClass):
     assert keyData['payoutRatio'] == 0
     assert keyData['price'] == 5.06
     assert keyData['priceToEarnings'] == 5.06/0.09
+    assert keyData['buyRating'] == 2
