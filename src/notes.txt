@@ -71,3 +71,23 @@ recommendationTrend
 
 
   price regularMarketPrice
+
+
+  revenue and earnings (yearly)
+
+    earnings financialsChart yearly
+      date
+      revenue raw
+      earnings raw
+
+    revenue and earnings (quarterly)
+
+      earnings earningsChart
+
+    Jo.
+    https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.lstsq.html
+    https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyfit.html
+    Je nachdem ob Du das als lineares Gleichungssystem siehst (erster Link, unten ist ein Beispiel) oder als Polynom ersten Gerades (zweiter link np.polifit(x,y,1)
+
+    Wenn Du das graphisch Zeichnen willst ist das zweite einfacher. Wenn Du ohne grafisch zu zeichnen nur den Trend haben willst wäre es das erste und Du guckst nur, ob im Beispiel m<>0 ist
+    Also wenn Du es mathematisch ordentlich haben möchtest
