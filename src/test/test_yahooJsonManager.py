@@ -13,6 +13,7 @@ testJson = json.loads(testJson)
 def startClass():
     startClass = YahooJsonManager()
     startClass.setStock('NBEV')
+    startClass.jsonData=testJson
     return startClass
 
 #comment this for not exeeding limit by testing
@@ -44,16 +45,38 @@ def test_analyseTendency(startClass):
 
 
 def test_getEarningsListQuartarly(startClass):
-    startClass.jsonData=testJson
     earningsList = startClass.getEarningsListQuartarly()
     assert earningsList == [-0.09, -0.08, -0.18, -0.02]
 
 def test_getEarningsListYearly(startClass):
-    startClass.jsonData=testJson
     earningsList = startClass.getEarningsListYearly()
     assert earningsList == [-1103333, -3633079, -3536000, -12135000]
 
 def test_getRevenueListYearly(startClass):
-    startClass.jsonData=testJson
     earningsList = startClass.getRevenueListYearly()
     assert earningsList == [2421752, 25301806, 52188000, 52160000]
+
+def test_getEarningsListQuartarlyTendency(startClass):
+    tendency = startClass.getEarningsListQuartarlyTendency()
+    assert tendency == -1
+
+def test_checkPositiveGrowthPercent(startClass):
+    checkList = [-0.09, -0.08, -0.18, -0.02]
+    positiveGrowth = startClass.checkPositiveGrowthPercent(checkList)
+    assert positiveGrowth == False
+    checkList = [0.09, -0.08, 0.18, 0.02]
+    positiveGrowth = startClass.checkPositiveGrowthPercent(checkList)
+    assert positiveGrowth == True
+
+
+def test_checkPositiveGrowth(startClass):
+    #check a good Revenue how many millions
+    checkList = [-1103333, -3633079, -3536000, -12135000]
+    positiveGrowth = startClass.checkPositiveGrowth(checkList)
+    assert positiveGrowth == False
+    checkList = [100000, 3633079, 3536000, 12135000]
+    positiveGrowth = startClass.checkPositiveGrowth(checkList)
+    assert positiveGrowth == False
+    checkList = [1000000000, 3633079, 3536000, 12135000]
+    positiveGrowth = startClass.checkPositiveGrowth(checkList)
+    assert positiveGrowth == True

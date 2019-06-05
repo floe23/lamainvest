@@ -50,6 +50,26 @@ class YahooJsonManager(object):
             return 5
         return 6
 
+    def checkPositiveGrowthPercent(self,listToCheck):
+        listSum = sum(listToCheck)
+        if listSum > 0:
+            return True
+        return False
+
+    def checkPositiveGrowth(self,listToCheck):
+        listSum = sum(listToCheck)
+        if listSum > 1000000000:
+            return True
+        return False
+
+    def getEarningsListQuartarlyTendency(self):
+        earningsList = self.getEarningsListQuartarly()
+        positiveGrowth = self.checkPositiveGrowthPercent(earningsList)
+        if not positiveGrowth:
+            return -1
+        tendency = self.analyseTendency(earningsList)
+        return tendency
+
     def getEarningsListQuartarly(self):
         jsonData = self.jsonData
         earnings = []
@@ -66,12 +86,12 @@ class YahooJsonManager(object):
             earnings.append(earning['earnings']['raw'])
         return earnings
 
-    def getEarningsListYearly(self):
+    def getRevenueListYearly(self):
         jsonData = self.jsonData
         earnings = []
         earningList = jsonData['earnings']['financialsChart']['yearly']
         for earning in earningList:
-            earnings.append(earning['earnings']['raw'])
+            earnings.append(earning['revenue']['raw'])
         return earnings
 
     def calculatePriceRating(self):
