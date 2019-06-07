@@ -70,6 +70,22 @@ class YahooJsonManager(object):
         tendency = self.analyseTendency(earningsList)
         return tendency
 
+    def getEarningsListYearlyTendency(self):
+        earningsList = self.getEarningsListYearly()
+        positiveGrowth = self.checkPositiveGrowth(earningsList)
+        if not positiveGrowth:
+            return -1
+        tendency = self.analyseTendency(earningsList)
+        return tendency
+
+    def getRevenueListYearlyTendency(self):
+        earningsList = self.getRevenueListYearly()
+        positiveGrowth = self.checkPositiveGrowth(earningsList)
+        if not positiveGrowth:
+            return -1
+        tendency = self.analyseTendency(earningsList)
+        return tendency
+
     def getEarningsListQuartarly(self):
         jsonData = self.jsonData
         earnings = []
@@ -83,6 +99,7 @@ class YahooJsonManager(object):
         earnings = []
         earningList = jsonData['earnings']['financialsChart']['yearly']
         for earning in earningList:
+            print(earning['earnings']['raw'])
             earnings.append(earning['earnings']['raw'])
         return earnings
 

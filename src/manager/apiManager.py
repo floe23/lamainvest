@@ -15,3 +15,9 @@ class ApiManager(object):
 
         response = json.loads(response.text)
         return response
+
+
+    def writeDataToGoogleSheet(self,data):
+        postUrl = "https://sheets.googleapis.com/v4/spreadsheets/1440500008/values/test!A1:D5"
+        response = requests.get(postUrl)
+        print(response.text)

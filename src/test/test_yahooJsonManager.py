@@ -56,9 +56,6 @@ def test_getRevenueListYearly(startClass):
     earningsList = startClass.getRevenueListYearly()
     assert earningsList == [2421752, 25301806, 52188000, 52160000]
 
-def test_getEarningsListQuartarlyTendency(startClass):
-    tendency = startClass.getEarningsListQuartarlyTendency()
-    assert tendency == -1
 
 def test_checkPositiveGrowthPercent(startClass):
     checkList = [-0.09, -0.08, -0.18, -0.02]
@@ -80,3 +77,27 @@ def test_checkPositiveGrowth(startClass):
     checkList = [1000000000, 3633079, 3536000, 12135000]
     positiveGrowth = startClass.checkPositiveGrowth(checkList)
     assert positiveGrowth == True
+
+def test_getEarningsListQuartarlyTendency(startClass):
+    tendency = startClass.getEarningsListQuartarlyTendency()
+    assert tendency == -1
+
+def test_getEarningsListYearlyTendency(startClass):
+    tendency = startClass.getEarningsListYearlyTendency()
+    assert tendency == -1
+    startClass.jsonData['earnings']['financialsChart']['yearly'][0]['earnings']['raw'] = 1000000000
+    startClass.jsonData['earnings']['financialsChart']['yearly'][1]['earnings']['raw'] = 1200000000
+    startClass.jsonData['earnings']['financialsChart']['yearly'][2]['earnings']['raw'] = 1300000000
+    startClass.jsonData['earnings']['financialsChart']['yearly'][3]['earnings']['raw'] = 1400000000
+    tendency = startClass.getEarningsListYearlyTendency()
+    assert tendency >= 0
+
+def test_getRevenueListYearlyTendency(startClass):
+    tendency = startClass.getRevenueListYearlyTendency()
+    assert tendency == -1
+    startClass.jsonData['earnings']['financialsChart']['yearly'][0]['revenue']['raw'] = 1000000000
+    startClass.jsonData['earnings']['financialsChart']['yearly'][1]['revenue']['raw'] = 1200000000
+    startClass.jsonData['earnings']['financialsChart']['yearly'][2]['revenue']['raw'] = 1300000000
+    startClass.jsonData['earnings']['financialsChart']['yearly'][3]['revenue']['raw'] = 1400000000
+    tendency = startClass.getRevenueListYearlyTendency()
+    assert tendency >= 0
