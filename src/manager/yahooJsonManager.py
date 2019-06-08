@@ -4,13 +4,31 @@ import numpy as np
 
 class YahooJsonManager(object):
 
+    debug = False
+
+    def getStockInfo(self,stockSymbol):
+        self.setStock(stockSymbol)
+        self.getJson()
+        data = self.getKeyData()
+        return data
+
     def setStock(self,stockSymbol):
         self.stockSymbol = stockSymbol
 
     def getJson(self):
         apiManager = ApiManager()
         stockSymbol = self.stockSymbol
-        self.jsonData = apiManager.getYahooStockAnalyisis(stockSymbol)
+        if self.debug:
+            self.jsonData = self.getTestJson()
+        else:
+            self.jsonData = apiManager.getYahooStockAnalyisis(stockSymbol)
+
+    def getTestJson(self):
+        with open('test/yahooTestJson.json', 'r') as myfile:
+            testJson=myfile.read()
+        testJson = json.loads(testJson)
+        return testJson
+
 
     def analyseTendency(self,mylist):
 

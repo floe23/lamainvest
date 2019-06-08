@@ -101,3 +101,11 @@ def test_getRevenueListYearlyTendency(startClass):
     startClass.jsonData['earnings']['financialsChart']['yearly'][3]['revenue']['raw'] = 1400000000
     tendency = startClass.getRevenueListYearlyTendency()
     assert tendency >= 0
+
+def test_wholeFunction(startClass):
+    startClass.debug = True
+    data = startClass.getStockInfo('NBEV')
+    print(data['price'])
+    print(data['priceToEarnings'])
+    print(data['payoutRatio'])
+    assert 1 == 2
