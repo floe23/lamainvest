@@ -147,6 +147,24 @@ class YahooJsonManager(object):
             return 5
         return 6
 
+    def calculateEarningsRatingQuartarly(self, tendency):
+        tendency_mark_1 = 0.6
+        tendency_mark_2 = 0.4
+        tendency_mark_3 = 0.2
+        tendency_mark_4 = 0.15
+        tendency_mark_5 = 0.1
+        if tendency >= tendency_mark_1:
+            return 1
+        if tendency >= tendency_mark_2:
+            return 2
+        if tendency >= tendency_mark_3:
+            return 3
+        if tendency >= tendency_mark_4:
+            return 4
+        if tendency >= tendency_mark_5:
+            return 5
+        return 6
+
 
     def getPriceRating(self):
 
