@@ -129,34 +129,45 @@ class YahooJsonManager(object):
             earnings.append(earning['revenue']['raw'])
         return earnings
 
-    def calculatePriceRating(self):
-        priceBelowHighRate_1 = 0.5
-        priceBelowHighRate_2 = 0.6
-        priceBelowHighRate_3 = 0.7
-        priceBelowHighRate_4 = 0.8
-        priceBelowHighRate_5 = 0.9
-        price = self.jsonData['price']['regularMarketPrice']['raw']
-        fiftyTwoWeekHigh = self.jsonData['quoteData'][self.stockSymbol]['fiftyTwoWeekHigh']['raw']
-        if price < fiftyTwoWeekHigh * priceBelowHighRate_1:
+    def calculatePriceRating(self, price, fiftyTwoWeekHigh):
+        priceBelowHighRate_1 = 0.98
+        priceBelowHighRate_2 = 0.8
+        priceBelowHighRate_3 = 0.5
+        priceBelowHighRate_4 = 0.4
+        priceBelowHighRate_5 = 0.2
+        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_1:
             return 1
-        if price < fiftyTwoWeekHigh * priceBelowHighRate_2:
+        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_2:
             return 2
-        if price < fiftyTwoWeekHigh * priceBelowHighRate_3:
+        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_3:
             return 3
-        if price < fiftyTwoWeekHigh * priceBelowHighRate_4:
+        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_4:
             return 4
-        if price < fiftyTwoWeekHigh * priceBelowHighRate_5:
+        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_5:
             return 5
         return 6
+
+
+    def getPriceRating(self):
+
+        price = self.jsonData['price']['regularMarketPrice']['raw']
+        fiftyTwoWeekHigh = self.jsonData['quoteData'][self.stockSymbol]['fiftyTwoWeekHigh']['raw']
+        priceRating = self.calculatePriceRating(price, fiftyTwoWeekHigh)
+        return priceRating
+
 
     def getKeyData(self):
         jsonData = self.jsonData
         pricePerShare = jsonData['price']['regularMarketPrice']['raw']
         earningsPerShare = jsonData['defaultKeyStatistics']['forwardEps']['raw']
         priceToEarnings = pricePerShare / earningsPerShare
-        buyingRating = self.calculatePriceRating()
+        buyingRating = self.getPriceRating()
         peRating = self.calculatePeRating()
+        quarterlyEarningsTendency = self.getEarningsListQuartarlyTendency()
+        yearlyEarningsTendency = self.getEarningsListYearlyTendency()
+        yearlyRevenueTendency = self.getRevenueListYearlyTendency()
         newJsonData = {
+            'stockSymbol' : self.stockSymbol,
             'shortName' : jsonData['quoteType']['shortName'],
             'longBusinessSummary' : jsonData['summaryProfile']['longBusinessSummary'],
             'returnOnEquity' : jsonData['financialData']['returnOnEquity']['raw'],
@@ -164,7 +175,10 @@ class YahooJsonManager(object):
             'priceToEarnings' : priceToEarnings,
             'price' : jsonData['price']['regularMarketPrice']['raw'],
             'payoutRatio' : jsonData['summaryDetail']['payoutRatio']['raw'],
-            'buyRating' : buyingRating,
-            'peRating' : peRating
+            'quarterlyEarningsTendency' : quarterlyEarningsTendency,
+            'yearlyEarningsTendency' : yearlyEarningsTendency,
+            'yearlyRevenueTendency' : yearlyRevenueTendency,
+            'peRating' : peRating,
+            'buyRating' : buyingRating
         }
         return newJsonData

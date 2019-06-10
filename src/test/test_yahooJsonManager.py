@@ -31,7 +31,7 @@ def test_getKeyData(startClass):
     assert keyData['payoutRatio'] == 0
     assert keyData['price'] == 5.06
     assert keyData['priceToEarnings'] == 5.06/0.09
-    assert keyData['buyRating'] == 2
+    assert keyData['buyRating'] == 4
     assert keyData['peRating'] == 6
 
 
@@ -43,6 +43,21 @@ def test_analyseTendency(startClass):
     tendency = startClass.analyseTendency(checkArray)
     assert tendency <= 0
 
+def test_calculatePriceRating(startClass):
+    priceRating = startClass.calculatePriceRating(1,400)
+    assert priceRating == 1
+    priceRating = startClass.calculatePriceRating(70,400)
+    assert priceRating == 2
+    priceRating = startClass.calculatePriceRating(200,400)
+    assert priceRating == 3
+    priceRating = startClass.calculatePriceRating(235,400)
+    assert priceRating == 4
+    priceRating = startClass.calculatePriceRating(315,400)
+    assert priceRating == 5
+    priceRating = startClass.calculatePriceRating(355,400)
+    assert priceRating == 6
+    priceRating = startClass.calculatePriceRating(450,400)
+    assert priceRating == 6
 
 def test_getEarningsListQuartarly(startClass):
     earningsList = startClass.getEarningsListQuartarly()
@@ -101,11 +116,3 @@ def test_getRevenueListYearlyTendency(startClass):
     startClass.jsonData['earnings']['financialsChart']['yearly'][3]['revenue']['raw'] = 1400000000
     tendency = startClass.getRevenueListYearlyTendency()
     assert tendency >= 0
-
-def test_wholeFunction(startClass):
-    startClass.debug = True
-    data = startClass.getStockInfo('NBEV')
-    print(data['price'])
-    print(data['priceToEarnings'])
-    print(data['payoutRatio'])
-    assert 1 == 2
