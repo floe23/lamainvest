@@ -5,24 +5,24 @@ import json
 
 # from yahooTestJson import testData
 # testData = json.load(testData)
-with open('test/yahooTestJson.json', 'r') as myfile:
+with open('test/testDataDetail_AAPL.json', 'r') as myfile:
     testJson=myfile.read()
 testJson = json.loads(testJson)
 
 @pytest.fixture
 def startClass():
     startClass = YahooJsonManager()
-    startClass.setStock('NBEV')
-    startClass.jsonData=testJson
+    startClass.setStock('AAPL')
+    startClass.jsonDataDetail=testJson
     return startClass
 
 #comment this for not exeeding limit by testing
 # def test_getJson(startClass):
 #     startClass.getJson()
-#     assert startClass.jsonData['quoteType']['shortName']== 'New Age Beverages Corporation'
+#     assert startClass.jsonDataDetail['quoteType']['shortName']== 'New Age Beverages Corporation'
 
 def test_getKeyData(startClass):
-    startClass.jsonData=testJson
+    startClass.jsonDataDetail=testJson
     keyData = startClass.getKeyData()
     assert keyData['shortName'] == 'New Age Beverages Corporation'
     assert len(keyData['longBusinessSummary']) >= 50
@@ -119,19 +119,19 @@ def test_getEarningsListQuartarlyTendency(startClass):
 def test_getEarningsListYearlyTendency(startClass):
     tendency = startClass.getEarningsListYearlyTendency()
     assert tendency == -1
-    startClass.jsonData['earnings']['financialsChart']['yearly'][0]['earnings']['raw'] = 1000000000
-    startClass.jsonData['earnings']['financialsChart']['yearly'][1]['earnings']['raw'] = 1200000000
-    startClass.jsonData['earnings']['financialsChart']['yearly'][2]['earnings']['raw'] = 1300000000
-    startClass.jsonData['earnings']['financialsChart']['yearly'][3]['earnings']['raw'] = 1400000000
+    startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][0]['earnings']['raw'] = 1000000000
+    startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][1]['earnings']['raw'] = 1200000000
+    startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][2]['earnings']['raw'] = 1300000000
+    startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][3]['earnings']['raw'] = 1400000000
     tendency = startClass.getEarningsListYearlyTendency()
     assert tendency >= 0
 
 def test_getRevenueListYearlyTendency(startClass):
     tendency = startClass.getRevenueListYearlyTendency()
     assert tendency == -1
-    startClass.jsonData['earnings']['financialsChart']['yearly'][0]['revenue']['raw'] = 1000000000
-    startClass.jsonData['earnings']['financialsChart']['yearly'][1]['revenue']['raw'] = 1200000000
-    startClass.jsonData['earnings']['financialsChart']['yearly'][2]['revenue']['raw'] = 1300000000
-    startClass.jsonData['earnings']['financialsChart']['yearly'][3]['revenue']['raw'] = 1400000000
+    startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][0]['revenue']['raw'] = 1000000000
+    startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][1]['revenue']['raw'] = 1200000000
+    startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][2]['revenue']['raw'] = 1300000000
+    startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][3]['revenue']['raw'] = 1400000000
     tendency = startClass.getRevenueListYearlyTendency()
     assert tendency >= 0

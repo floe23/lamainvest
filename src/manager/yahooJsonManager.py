@@ -19,12 +19,20 @@ class YahooJsonManager(object):
         apiManager = ApiManager()
         stockSymbol = self.stockSymbol
         if self.debug:
-            self.jsonData = self.getTestJson()
+            self.jsonDataDetail = self.getTestJsonDetail()
+            self.jsonDataDetailHistory = self.getTestJsonHistory()
         else:
-            self.jsonData = apiManager.getYahooStockDetail(stockSymbol)
+            self.jsonDataDetail = apiManager.getYahooStockDetail(stockSymbol)
+            self.jsonDataDetailHistory = apiManager.getYahooStockHistory(stockSymbol)
 
-    def getTestJson(self):
-        with open('test/yahooTestJson.json', 'r') as myfile:
+    def getTestJsonDetail(self):
+        with open('test/testDataDetail_AAPL.json', 'r') as myfile:
+            testJson=myfile.read()
+        testJson = json.loads(testJson)
+        return testJson
+
+    def getTestJsonHistory(self):
+        with open('test/testDataHistory_AAPL.json', 'r') as myfile:
             testJson=myfile.read()
         testJson = json.loads(testJson)
         return testJson
@@ -47,7 +55,7 @@ class YahooJsonManager(object):
 
 
     def calculatePeRating(self):
-        jsonData = self.jsonData
+        jsonData = self.jsonDataDetail
         PeRatingBelow_1 = 15
         PeRatingBelow_2 = 20
         PeRatingBelow_3 = 25
@@ -105,7 +113,7 @@ class YahooJsonManager(object):
         return tendency
 
     def getEarningsListQuartarly(self):
-        jsonData = self.jsonData
+        jsonData = self.jsonDataDetail
         earnings = []
         earningList = jsonData['earnings']['earningsChart']['quarterly']
         for earning in earningList:
@@ -113,7 +121,7 @@ class YahooJsonManager(object):
         return earnings
 
     def getEarningsListYearly(self):
-        jsonData = self.jsonData
+        jsonData = self.jsonDataDetail
         earnings = []
         earningList = jsonData['earnings']['financialsChart']['yearly']
         for earning in earningList:
@@ -122,7 +130,7 @@ class YahooJsonManager(object):
         return earnings
 
     def getRevenueListYearly(self):
-        jsonData = self.jsonData
+        jsonData = self.jsonDataDetail
         earnings = []
         earningList = jsonData['earnings']['financialsChart']['yearly']
         for earning in earningList:
@@ -168,14 +176,14 @@ class YahooJsonManager(object):
 
     def getPriceRating(self):
 
-        price = self.jsonData['price']['regularMarketPrice']['raw']
-        fiftyTwoWeekHigh = self.jsonData['quoteData'][self.stockSymbol]['fiftyTwoWeekHigh']['raw']
+        price = self.jsonDataDetail['price']['regularMarketPrice']['raw']
+        fiftyTwoWeekHigh = self.jsonDataDetail['quoteData'][self.stockSymbol]['fiftyTwoWeekHigh']['raw']
         priceRating = self.calculatePriceRating(price, fiftyTwoWeekHigh)
         return priceRating
 
 
     def getKeyData(self):
-        jsonData = self.jsonData
+        jsonData = self.jsonDataDetail
         pricePerShare = jsonData['price']['regularMarketPrice']['raw']
         earningsPerShare = jsonData['defaultKeyStatistics']['forwardEps']['raw']
         priceToEarnings = pricePerShare / earningsPerShare
