@@ -33,9 +33,9 @@ def test_getKeyData(startClass):
     assert keyData['priceToEarnings'] == 5.06/0.09
     assert keyData['buyRating'] == 4
     assert keyData['peRating'] == 6
-    # assert keyData['earningsQuarterlyRating'] == 6
-    # assert keyData['earningsYearlyRating'] == 6
-    # assert keyData['revenueYearlyRating'] == 6
+    assert keyData['earningsQuarterlyRating'] == 6
+    assert keyData['earningsYearlyRating'] == 6
+    assert keyData['revenueYearlyRating'] == 6
 
 
 def test_analyseTendency(startClass):
@@ -62,20 +62,20 @@ def test_calculatePriceRating(startClass):
     priceRating = startClass.calculatePriceRating(450,400)
     assert priceRating == 6
 
-def test_calculateEarningsRatingQuartarly(startClass):
-    tendencyRating = startClass.calculateEarningsRatingQuartarly(0.6)
+def test_calculateGrowthRating(startClass):
+    tendencyRating = startClass.calculateGrowthRating(0.6)
     assert tendencyRating == 1
-    tendencyRating = startClass.calculateEarningsRatingQuartarly(0.4)
+    tendencyRating = startClass.calculateGrowthRating(0.4)
     assert tendencyRating == 2
-    tendencyRating = startClass.calculateEarningsRatingQuartarly(0.2)
+    tendencyRating = startClass.calculateGrowthRating(0.2)
     assert tendencyRating == 3
-    tendencyRating = startClass.calculateEarningsRatingQuartarly(0.15)
+    tendencyRating = startClass.calculateGrowthRating(0.15)
     assert tendencyRating == 4
-    tendencyRating = startClass.calculateEarningsRatingQuartarly(0.1)
+    tendencyRating = startClass.calculateGrowthRating(0.1)
     assert tendencyRating == 5
-    tendencyRating = startClass.calculateEarningsRatingQuartarly(0.03)
+    tendencyRating = startClass.calculateGrowthRating(0.03)
     assert tendencyRating == 6
-    tendencyRating = startClass.calculateEarningsRatingQuartarly(-1)
+    tendencyRating = startClass.calculateGrowthRating(-1)
     assert tendencyRating == 6
 
 def test_getEarningsListQuartarly(startClass):

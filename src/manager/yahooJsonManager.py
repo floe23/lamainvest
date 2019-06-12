@@ -147,7 +147,7 @@ class YahooJsonManager(object):
             return 5
         return 6
 
-    def calculateEarningsRatingQuartarly(self, tendency):
+    def calculateGrowthRating(self, tendency):
         tendency_mark_1 = 0.6
         tendency_mark_2 = 0.4
         tendency_mark_3 = 0.2
@@ -184,6 +184,9 @@ class YahooJsonManager(object):
         quarterlyEarningsTendency = self.getEarningsListQuartarlyTendency()
         yearlyEarningsTendency = self.getEarningsListYearlyTendency()
         yearlyRevenueTendency = self.getRevenueListYearlyTendency()
+        earningsQuarterlyRating = self.calculateGrowthRating(quarterlyEarningsTendency)
+        earningsYearlyRating = self.calculateGrowthRating(yearlyEarningsTendency)
+        revenueYearlyRating = self.calculateGrowthRating(yearlyRevenueTendency)
         newJsonData = {
             'stockSymbol' : self.stockSymbol,
             'shortName' : jsonData['quoteType']['shortName'],
@@ -196,7 +199,10 @@ class YahooJsonManager(object):
             'quarterlyEarningsTendency' : quarterlyEarningsTendency,
             'yearlyEarningsTendency' : yearlyEarningsTendency,
             'yearlyRevenueTendency' : yearlyRevenueTendency,
+            'buyRating' : buyingRating,
             'peRating' : peRating,
-            'buyRating' : buyingRating
+            'earningsQuarterlyRating' : earningsQuarterlyRating,
+            'earningsYearlyRating' : earningsYearlyRating,
+            'revenueYearlyRating' : revenueYearlyRating,
         }
         return newJsonData
