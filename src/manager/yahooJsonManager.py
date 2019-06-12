@@ -21,7 +21,7 @@ class YahooJsonManager(object):
         if self.debug:
             self.jsonData = self.getTestJson()
         else:
-            self.jsonData = apiManager.getYahooStockAnalyisis(stockSymbol)
+            self.jsonData = apiManager.getYahooStockDetail(stockSymbol)
 
     def getTestJson(self):
         with open('test/yahooTestJson.json', 'r') as myfile:
