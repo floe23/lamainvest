@@ -5,7 +5,8 @@ class Lamalyse(object):
 
     debug = False
 
-    def start(self,stockSymbol):
+    def start(self,stockSymbol, sheetRow):
+        self.sheetRow = sheetRow
         self.getYahooDataInfo(stockSymbol)
         self.writeKeysToSheet()
         self.writeDataToSheet()
@@ -28,7 +29,7 @@ class Lamalyse(object):
 
     def writeDataToSheet(self):
         googleSheetManager = GoogleSheetManager()
-        googleSheetManager.sheetRange = 'test!A2:Z2'
+        googleSheetManager.sheetRange = 'test!A{0}:Z{0}'.format(self.sheetRow)
         data = self.dataJsonYahooInfo
         dataValues = []
         for dataValue in data.values():
