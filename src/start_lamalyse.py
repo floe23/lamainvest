@@ -2,19 +2,20 @@ from manager.lamalyse import Lamalyse
 
 
 stockArray = [
-    'AAPL',
-    'AAPL',
-    'AAPL',
-    'AAPL',
+    'UBER',
+    'LYFT',
+    'AMZN',
+    'FB',
+    'GOOG',
     'AAPL',
                ]
 
 
 analyser = Lamalyse()
-analyser.debug = True
+analyser.debug = False
 
 counter = 1
 for stock in stockArray:
     counter = counter + 1
-    data = analyser.start('AAPL',counter)
+    data = analyser.start(stock,counter)
 print("successfully updated analyse")

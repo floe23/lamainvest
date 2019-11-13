@@ -28,3 +28,7 @@ remove hard codedd api keys or move them to gitignore file
 
 
 last 5 year growth  
+
+api host and api key to constructor
+
+call one etf and get the data

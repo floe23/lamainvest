@@ -182,8 +182,18 @@ class YahooJsonManager(object):
         return priceRating
 
     def getDividendYield(self):
-        if self.jsonData['summaryDetail']['dividendYield']:
-            return
+        try:
+            dividendYield = self.jsonDataDetail['summaryDetail']['dividendYield']['raw']
+            return dividendYield
+        except:
+            return 0
+
+    def getReturnOnEquity(self):
+        try:
+            returnOnEquity = self.jsonDataDetail['financialData']['returnOnEquity']['raw']
+            return returnOnEquity
+        except:
+            return 0
 
 
     def getKeyData(self):
@@ -199,13 +209,15 @@ class YahooJsonManager(object):
         earningsQuarterlyRating = self.calculateGrowthRating(quarterlyEarningsTendency)
         earningsYearlyRating = self.calculateGrowthRating(yearlyEarningsTendency)
         revenueYearlyRating = self.calculateGrowthRating(yearlyRevenueTendency)
-        print(jsonData['summaryDetail'])
+        dividendYield = self.getDividendYield()
+        returnOnEquity = self.getReturnOnEquity()
+
         newJsonData = {
             'stockSymbol' : self.stockSymbol,
             'shortName' : jsonData['quoteType']['shortName'],
             'longBusinessSummary' : jsonData['summaryProfile']['longBusinessSummary'],
-            'returnOnEquity' : jsonData['financialData']['returnOnEquity']['raw'],
-            'dividendYield' : jsonData['summaryDetail']['dividendYield']['raw'],
+            'returnOnEquity' : returnOnEquity,
+            'dividendYield' : dividendYield,
             'priceToEarnings' : priceToEarnings,
             'price' : jsonData['price']['regularMarketPrice']['raw'],
             'payoutRatio' : jsonData['summaryDetail']['payoutRatio']['raw'],
