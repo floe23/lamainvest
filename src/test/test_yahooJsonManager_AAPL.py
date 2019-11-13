@@ -24,18 +24,18 @@ def startClass():
 def test_getKeyData(startClass):
     startClass.jsonDataDetail=testJson
     keyData = startClass.getKeyData()
-    assert keyData['shortName'] == 'New Age Beverages Corporation'
+    assert keyData['shortName'] == 'Apple Inc.'
     assert len(keyData['longBusinessSummary']) >= 50
-    assert keyData['returnOnEquity'] == -0.107259996
-    assert keyData['dividendYield'] == 33453
-    assert keyData['payoutRatio'] == 0
-    assert keyData['price'] == 5.06
-    assert keyData['priceToEarnings'] == 5.06/0.09
-    assert keyData['buyRating'] == 4
-    assert keyData['peRating'] == 6
-    assert keyData['earningsQuarterlyRating'] == 6
-    assert keyData['earningsYearlyRating'] == 6
-    assert keyData['revenueYearlyRating'] == 6
+    assert keyData['returnOnEquity'] == 0.49128
+    assert keyData['dividendYield'] == 0.0176
+    assert keyData['payoutRatio'] == 0.2446
+    assert keyData['price'] == 194.19
+    assert keyData['priceToEarnings'] == 194.19/12.69
+    assert keyData['buyRating'] == 6
+    assert keyData['peRating'] == 2
+    assert keyData['earningsQuarterlyRating'] == 4
+    assert keyData['earningsYearlyRating'] == 1
+    assert keyData['revenueYearlyRating'] == 1
 
 
 def test_analyseTendency(startClass):
@@ -80,15 +80,15 @@ def test_calculateGrowthRating(startClass):
 
 def test_getEarningsListQuartarly(startClass):
     earningsList = startClass.getEarningsListQuartarly()
-    assert earningsList == [-0.09, -0.08, -0.18, -0.02]
+    assert earningsList == [2.34, 2.91, 4.18, 2.46]
 
 def test_getEarningsListYearly(startClass):
     earningsList = startClass.getEarningsListYearly()
-    assert earningsList == [-1103333, -3633079, -3536000, -12135000]
+    assert earningsList == [233715000000, 53394000000, 215639000000, 45687000000]
 
 def test_getRevenueListYearly(startClass):
     earningsList = startClass.getRevenueListYearly()
-    assert earningsList == [2421752, 25301806, 52188000, 52160000]
+    assert earningsList == [229234000000, 265595000000, 53265000000, 52160000]
 
 
 def test_checkPositiveGrowthPercent(startClass):

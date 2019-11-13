@@ -16,7 +16,7 @@ class ApiManager(object):
         response = requests.get(getUrl,
                         headers={
                         "X-RapidAPI-Host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-                        "X-RapidAPI-Key": "97e69408admsh515d6cf4af439d8p128941jsnf6ff1425c725"
+                        "X-RapidAPI-Key": "54d4520c5amshddd4bfc35653a2dp191ce6jsnb2e1d3da103e"
                         }
                     )
 
@@ -30,7 +30,7 @@ class ApiManager(object):
         response = requests.get(getUrl,
                         headers={
                         "X-RapidAPI-Host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-                        "X-RapidAPI-Key": "97e69408admsh515d6cf4af439d8p128941jsnf6ff1425c725"
+                        "X-RapidAPI-Key": "54d4520c5amshddd4bfc35653a2dp191ce6jsnb2e1d3da103e"
                         }
                     )
 

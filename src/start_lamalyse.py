@@ -1,6 +1,6 @@
 from manager.lamalyse import Lamalyse
 
 analyser = Lamalyse()
-analyser.debug = True
-data = analyser.start('NBEV')
+analyser.debug = False
+data = analyser.start('AAPL')
 print("successfully updated analyse")

@@ -4,7 +4,7 @@ import numpy as np
 
 class YahooJsonManager(object):
 
-    debug = False
+    debug = True
 
     def getStockInfo(self,stockSymbol):
         self.setStock(stockSymbol)
@@ -26,13 +26,13 @@ class YahooJsonManager(object):
             self.jsonDataDetailHistory = apiManager.getYahooStockHistory(stockSymbol)
 
     def getTestJsonDetail(self):
-        with open('test/testDataDetail_AAPL.json', 'r') as myfile:
+        with open('src/test/testDataDetail_AAPL.json', 'r') as myfile:
             testJson=myfile.read()
         testJson = json.loads(testJson)
         return testJson
 
     def getTestJsonHistory(self):
-        with open('test/testDataHistory_AAPL.json', 'r') as myfile:
+        with open('src/test/testDataHistory_AAPL.json', 'r') as myfile:
             testJson=myfile.read()
         testJson = json.loads(testJson)
         return testJson
@@ -181,6 +181,10 @@ class YahooJsonManager(object):
         priceRating = self.calculatePriceRating(price, fiftyTwoWeekHigh)
         return priceRating
 
+    def getDividendYield(self):
+        if self.jsonData['summaryDetail']['dividendYield']:
+            return
+
 
     def getKeyData(self):
         jsonData = self.jsonDataDetail
@@ -195,6 +199,7 @@ class YahooJsonManager(object):
         earningsQuarterlyRating = self.calculateGrowthRating(quarterlyEarningsTendency)
         earningsYearlyRating = self.calculateGrowthRating(yearlyEarningsTendency)
         revenueYearlyRating = self.calculateGrowthRating(yearlyRevenueTendency)
+        print(jsonData['summaryDetail'])
         newJsonData = {
             'stockSymbol' : self.stockSymbol,
             'shortName' : jsonData['quoteType']['shortName'],

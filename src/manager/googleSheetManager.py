@@ -32,7 +32,7 @@ class GoogleSheetManager(object):
                 creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    'manager/credentials.json', self.SCOPES)
+                    'src/manager/credentials.json', self.SCOPES)
                 creds = flow.run_local_server()
             # Save the credentials for the next run
             with open('token.pickle', 'wb') as token:
