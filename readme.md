@@ -32,3 +32,20 @@ last 5 year growth
 api host and api key to constructor
 
 call one etf and get the data
+
+
+
+questions to answer
+what is the revenue in 4 years?
+getEarningsListYearlyTendency
+
+what is the earnings in 4 years?
+getEarningsListYearlyTendency
+
+differ between small and big companies? use a percentage?
+
+
+ai to predict course?
+
+
+Display graphs?

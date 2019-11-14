@@ -1,4 +1,4 @@
-from manager.apiManager import ApiManager
+from src.manager.apiManager import ApiManager
 import json
 import numpy as np
 
@@ -38,7 +38,7 @@ class YahooJsonManager(object):
         return testJson
 
 
-    def analyseTendency(self,mylist):
+    def calculateGrowthSlope(self,mylist):
 
         y = np.array(mylist)
         x = np.arange(1, len(y)+1)
@@ -52,6 +52,17 @@ class YahooJsonManager(object):
         y_fit = m*x + c
         print("y-werte der ausgleichsrechnung: ", y_fit)
         return m
+
+    def calculateGrowthSum(self,mylist):
+
+        growthArray = []
+        for pop in range(1, len(mylist)):
+            growth = ((mylist[pop] - mylist[pop-1]) / mylist[pop-1])
+            if mylist[pop-1] < 0:
+                growth = growth * -1
+            growthArray.append(growth)
+        totalGrwoth = sum(growthArray)
+        return round(totalGrwoth,2)
 
 
     def calculatePeRating(self):
@@ -76,49 +87,80 @@ class YahooJsonManager(object):
             return 5
         return 6
 
-    def checkPositiveGrowthPercent(self,listToCheck):
+
+    def getRevenueListYearly(self):
+        jsonData = self.jsonDataDetail
+        newEarningList = []
+        earningList = jsonData['earnings']['financialsChart']['yearly']
+        for earning in earningList:
+            revenue = earning['revenue']['raw']
+            newEarningList.append(revenue)
+        return newEarningList
+
+    def checkRevenueAmount(self,listToCheck):
         listSum = sum(listToCheck)
-        if listSum > 0:
+        oneBillion = 1000000000
+        if listSum > oneBillion:
             return True
         return False
-
-    def checkPositiveGrowth(self,listToCheck):
-        listSum = sum(listToCheck)
-        if listSum > 1000000000:
-            return True
-        return False
-
-    def getEarningsListQuartarlyTendency(self):
-        earningsList = self.getEarningsListQuartarly()
-        positiveGrowth = self.checkPositiveGrowthPercent(earningsList)
-        if not positiveGrowth:
-            return -1
-        tendency = self.analyseTendency(earningsList)
-        return tendency
-
-    def getEarningsListYearlyTendency(self):
-        earningsList = self.getEarningsListYearly()
-        positiveGrowth = self.checkPositiveGrowth(earningsList)
-        if not positiveGrowth:
-            return -1
-        tendency = self.analyseTendency(earningsList)
-        return tendency
 
     def getRevenueListYearlyTendency(self):
-        earningsList = self.getRevenueListYearly()
-        positiveGrowth = self.checkPositiveGrowth(earningsList)
-        if not positiveGrowth:
-            return -1
-        tendency = self.analyseTendency(earningsList)
+        list = self.getRevenueListYearly()
+        tendency = self.calculateGrowthSum(list)
         return tendency
+
+    def getRevenueListQuarterlyTendency(self):
+        list = self.getRevenueListQuarterly()
+        tendency = self.calculateGrowthSum(list)
+        return tendency
+
+    def getRevenueListQuarterly(self):
+        jsonData = self.jsonDataDetail
+        newRevenueList = []
+        revenueList = jsonData['earnings']['financialsChart']['quarterly']
+        for revenue in revenueList:
+            newRevenueList.append(revenue['revenue']['raw'])
+        return newRevenueList
 
     def getEarningsListQuartarly(self):
         jsonData = self.jsonDataDetail
         earnings = []
-        earningList = jsonData['earnings']['earningsChart']['quarterly']
+        earningList = jsonData['earnings']['financialsChart']['quarterly']
         for earning in earningList:
-            earnings.append(earning['actual']['raw'])
+            earnings.append(earning['earnings']['raw'])
         return earnings
+
+
+    def checkEarningsAmount(self,listToCheck):
+        listSum = sum(listToCheck)
+        oneMillion = 1000000
+        if listSum > (10*oneMillion):
+            return True
+        return False
+
+    def checkEarningsAmountQuarterly(self,listToCheck):
+        listSum = sum(listToCheck)
+        if listSum > 5:
+            return True
+        return False
+
+
+    def getEarningsListQuartarlyTendency(self):
+        earningsList = self.getEarningsListQuartarly()
+        positiveGrowth = self.checkEarningsAmountQuarterly(earningsList)
+        if not positiveGrowth:
+            return -1
+        tendency = self.calculateGrowthSum(earningsList)
+        return tendency
+
+    def getEarningsListYearlyTendency(self):
+        earningsList = self.getEarningsListYearly()
+        positiveGrowth = self.checkEarningsAmount(earningsList)
+        if not positiveGrowth:
+            return -1
+        tendency = self.calculateGrowthSum(earningsList)
+        return tendency
+
 
     def getEarningsListYearly(self):
         jsonData = self.jsonDataDetail
@@ -129,13 +171,6 @@ class YahooJsonManager(object):
             earnings.append(earning['earnings']['raw'])
         return earnings
 
-    def getRevenueListYearly(self):
-        jsonData = self.jsonDataDetail
-        earnings = []
-        earningList = jsonData['earnings']['financialsChart']['yearly']
-        for earning in earningList:
-            earnings.append(earning['revenue']['raw'])
-        return earnings
 
     def calculatePriceRating(self, price, fiftyTwoWeekHigh):
         priceBelowHighRate_1 = 0.98
@@ -156,6 +191,7 @@ class YahooJsonManager(object):
         return 6
 
     def calculateGrowthRating(self, tendency):
+        print("tendency",tendency)
         tendency_mark_1 = 0.6
         tendency_mark_2 = 0.4
         tendency_mark_3 = 0.2
@@ -203,12 +239,12 @@ class YahooJsonManager(object):
         priceToEarnings = pricePerShare / earningsPerShare
         buyingRating = self.getPriceRating()
         peRating = self.calculatePeRating()
-        quarterlyEarningsTendency = self.getEarningsListQuartarlyTendency()
-        yearlyEarningsTendency = self.getEarningsListYearlyTendency()
         yearlyRevenueTendency = self.getRevenueListYearlyTendency()
+        revenueYearlyRating = self.calculateGrowthRating(yearlyRevenueTendency)
+        yearlyEarningsTendency = self.getEarningsListYearlyTendency()
+        quarterlyEarningsTendency = self.getEarningsListQuartarlyTendency()
         earningsQuarterlyRating = self.calculateGrowthRating(quarterlyEarningsTendency)
         earningsYearlyRating = self.calculateGrowthRating(yearlyEarningsTendency)
-        revenueYearlyRating = self.calculateGrowthRating(yearlyRevenueTendency)
         dividendYield = self.getDividendYield()
         returnOnEquity = self.getReturnOnEquity()
 
@@ -221,13 +257,13 @@ class YahooJsonManager(object):
             'priceToEarnings' : priceToEarnings,
             'price' : jsonData['price']['regularMarketPrice']['raw'],
             'payoutRatio' : jsonData['summaryDetail']['payoutRatio']['raw'],
-            'quarterlyEarningsTendency' : quarterlyEarningsTendency,
-            'yearlyEarningsTendency' : yearlyEarningsTendency,
             'yearlyRevenueTendency' : yearlyRevenueTendency,
+            'revenueYearlyRating' : revenueYearlyRating,
+            'yearlyEarningsTendency' : yearlyEarningsTendency,
+            'quarterlyEarningsTendency' : quarterlyEarningsTendency,
+            'earningsYearlyRating' : earningsYearlyRating,
+            'earningsQuarterlyRating' : earningsQuarterlyRating,
             'buyRating' : buyingRating,
             'peRating' : peRating,
-            'earningsQuarterlyRating' : earningsQuarterlyRating,
-            'earningsYearlyRating' : earningsYearlyRating,
-            'revenueYearlyRating' : revenueYearlyRating,
         }
         return newJsonData
