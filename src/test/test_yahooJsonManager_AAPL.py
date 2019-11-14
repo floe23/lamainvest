@@ -9,11 +9,16 @@ with open('src/test/testDataDetail_AAPL.json', 'r') as myfile:
     testJson=myfile.read()
 testJson = json.loads(testJson)
 
+with open('src/test/testDataHistory_AAPL.json', 'r') as myfile1:
+    testJsonHist=myfile1.read()
+testJsonHist = json.loads(testJsonHist)
+
 @pytest.fixture
 def startClass():
     startClass = YahooJsonManager()
     startClass.setStock('AAPL')
     startClass.jsonDataDetail=testJson
+    startClass.jsonDataDetailHistory=testJsonHist
     return startClass
 
 #comment this for not exeeding limit by testing
@@ -33,9 +38,9 @@ def test_getKeyData(startClass):
     assert keyData['priceToEarnings'] == 194.19/12.69
     assert keyData['buyRating'] == 6
     assert keyData['peRating'] == 2
-    assert keyData['earningsQuarterlyRating'] == 4
-    assert keyData['earningsYearlyRating'] == 1
-    assert keyData['revenueYearlyRating'] == 1
+    assert keyData['earningsQuarterlyRating'] == 3
+    assert keyData['earningsYearlyRating'] == 4
+    assert keyData['revenueYearlyRating'] == 5
 
 
 def test_calculateGrowthSum(startClass):
@@ -115,3 +120,7 @@ def test_getEarningsListQuartarlyTendency(startClass):
 def test_getEarningsListYearlyTendency(startClass):
     tendency = startClass.getEarningsListYearlyTendency()
     assert tendency == 0.15
+
+def test_getFiveYearChange(startClass):
+    change = startClass.getFiveYearChangey()
+    assert change == 1.10
