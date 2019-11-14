@@ -115,32 +115,3 @@ def test_getEarningsListQuartarlyTendency(startClass):
 def test_getEarningsListYearlyTendency(startClass):
     tendency = startClass.getEarningsListYearlyTendency()
     assert tendency == 0.15
-
-
-# def test_getEarningsListYearlyTendency(startClass):
-#     startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][0]['earnings']['raw'] = 200000000
-#     startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][1]['earnings']['raw'] = -500000000
-#     startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][2]['earnings']['raw'] = 500000000
-#     startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][3]['earnings']['raw'] = 700000000
-#     tendency = startClass.getEarningsListYearlyTendency()
-#     assert tendency == -1
-#     startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][0]['earnings']['raw'] = 200000000
-#     startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][1]['earnings']['raw'] = -300000000
-#     startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][2]['earnings']['raw'] = 500000000
-#     startClass.jsonDataDetail['earnings']['financialsChart']['yearly'][3]['earnings']['raw'] = 700000000
-#     tendency = startClass.getEarningsListYearlyTendency()
-#     assert tendency >= 0
-#
-# def test_getEarningsListQuarterlyTendency(startClass):
-#     tendency = startClass.getEarningsListQuarterlyTendency()
-#     startClass.jsonDataDetail['earnings']['financialsChart']['quarterly'][0]['revenue']['raw'] = 1000000000
-#     startClass.jsonDataDetail['earnings']['financialsChart']['quarterly'][1]['revenue']['raw'] = 1200000000
-#     startClass.jsonDataDetail['earnings']['financialsChart']['quarterly'][2]['revenue']['raw'] = 1300000000
-#     startClass.jsonDataDetail['earnings']['financialsChart']['quarterly'][3]['revenue']['raw'] = 1400000000
-#     assert tendency == -1
-#     startClass.jsonDataDetail['earnings']['financialsChart']['quarterly'][0]['revenue']['raw'] = 1000000000
-#     startClass.jsonDataDetail['earnings']['financialsChart']['quarterly'][1]['revenue']['raw'] = 1200000000
-#     startClass.jsonDataDetail['earnings']['financialsChart']['quarterly'][2]['revenue']['raw'] = 1300000000
-#     startClass.jsonDataDetail['earnings']['financialsChart']['quarterly'][3]['revenue']['raw'] = 1400000000
-#     tendency = startClass.getEarningsListQuarterlyTendency()
-#     assert tendency >= 0
