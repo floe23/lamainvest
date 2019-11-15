@@ -258,6 +258,26 @@ class YahooJsonManager(object):
         growth = (today-fiveYearsAgo)/fiveYearsAgo
         return round(growth, 2)
 
+    def setDividendYieldRating(self):
+        dividendYield = self.getDividendYield()
+        if dividendYield > 0.01 and dividendYield < 0.05:
+            return "+"
+        else:
+            return "-"
+
+    def setPayoutRatioRating(self):
+        payoutRatio =  self.jsonDataDetail['summaryDetail']['payoutRatio']['raw']
+        if payoutRatio < 0.6:
+            return "+"
+        else:
+            return "-"
+
+    def setReturnOnEquityRating(self):
+        returnOnEquity = self.getReturnOnEquity()
+        if returnOnEquity > 0.1:
+            return "+"
+        else:
+            return "-"
 
     def getKeyData(self):
         jsonData = self.jsonDataDetail
@@ -277,26 +297,32 @@ class YahooJsonManager(object):
         stockPriceFiveYearChange = self.getFiveYearChange()
         stockPriceThreeYearChange = self.getThreeYearChange()
         stockPriceOneYearChange = self.getOneYearChange()
+        dividendYieldRating = self.setDividendYieldRating()
+        payoutRatioRating = self.setPayoutRatioRating()
+        returnOnEquityRating = self.setReturnOnEquityRating()
 
         newJsonData = {
+            'buyRating' : buyingRating,
+            'earningsYearlyRating' : earningsYearlyRating,
+            'earningsQuarterlyRating' : earningsQuarterlyRating,
+            'peRating' : peRating,
+            'dividendYieldRating' : dividendYieldRating,
+            'payoutRatioRating' : payoutRatioRating,
+            'returnOnEquityRating' : returnOnEquityRating,
+            'revenueYearlyRating' : revenueYearlyRating,
             'stockSymbol' : self.stockSymbol,
             'shortName' : jsonData['quoteType']['shortName'],
-            'longBusinessSummary' : jsonData['summaryProfile']['longBusinessSummary'],
             'returnOnEquity' : returnOnEquity,
             'dividendYield' : dividendYield,
             'priceToEarnings' : priceToEarnings,
             'price' : jsonData['price']['regularMarketPrice']['raw'],
             'payoutRatio' : jsonData['summaryDetail']['payoutRatio']['raw'],
             'yearlyRevenueTendency' : yearlyRevenueTendency,
-            'revenueYearlyRating' : revenueYearlyRating,
             'yearlyEarningsTendency' : yearlyEarningsTendency,
             'quarterlyEarningsTendency' : quarterlyEarningsTendency,
-            'earningsYearlyRating' : earningsYearlyRating,
-            'earningsQuarterlyRating' : earningsQuarterlyRating,
-            'buyRating' : buyingRating,
-            'peRating' : peRating,
             'stockPriceFiveYearChange' : stockPriceFiveYearChange,
             'stockPriceThreeYearChange' : stockPriceThreeYearChange,
             'stockPriceOneYearChange' : stockPriceOneYearChange,
+            'longBusinessSummary' : jsonData['summaryProfile']['longBusinessSummary'],
         }
         return newJsonData

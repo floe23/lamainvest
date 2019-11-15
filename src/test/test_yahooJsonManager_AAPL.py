@@ -48,6 +48,9 @@ def test_getKeyData(startClass):
     assert keyData['stockPriceFiveYearChange'] == 1.1
     assert keyData['stockPriceThreeYearChange'] == 0.8
     assert keyData['stockPriceOneYearChange'] == -0.13
+    assert keyData['dividendYieldRating'] == "+"
+    assert keyData['payoutRatioRating'] == "+"
+    assert keyData['returnOnEquityRating'] == "+"
 
 
 def test_calculateGrowthSum(startClass):
