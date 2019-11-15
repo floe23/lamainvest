@@ -231,12 +231,30 @@ class YahooJsonManager(object):
         except:
             return 0
 
-    def getFiveYearChangey(self):
+    def getFiveYearChange(self):
         stockPriceList = self.jsonDataDetailHistory['chart']['result'][0]['indicators']['adjclose'][0]['adjclose']
         stockPriceListLength = len(stockPriceList)
         print(stockPriceListLength)
         today = stockPriceList[stockPriceListLength-1]
         fiveYearsAgo = stockPriceList[stockPriceListLength-21]
+        growth = (today-fiveYearsAgo)/fiveYearsAgo
+        return round(growth, 2)
+
+    def getThreeYearChange(self):
+        stockPriceList = self.jsonDataDetailHistory['chart']['result'][0]['indicators']['adjclose'][0]['adjclose']
+        stockPriceListLength = len(stockPriceList)
+        print(stockPriceListLength)
+        today = stockPriceList[stockPriceListLength-1]
+        fiveYearsAgo = stockPriceList[stockPriceListLength-13]
+        growth = (today-fiveYearsAgo)/fiveYearsAgo
+        return round(growth, 2)
+
+    def getOneYearChange(self):
+        stockPriceList = self.jsonDataDetailHistory['chart']['result'][0]['indicators']['adjclose'][0]['adjclose']
+        stockPriceListLength = len(stockPriceList)
+        print(stockPriceListLength)
+        today = stockPriceList[stockPriceListLength-1]
+        fiveYearsAgo = stockPriceList[stockPriceListLength-5]
         growth = (today-fiveYearsAgo)/fiveYearsAgo
         return round(growth, 2)
 

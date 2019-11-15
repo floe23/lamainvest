@@ -122,5 +122,13 @@ def test_getEarningsListYearlyTendency(startClass):
     assert tendency == 0.15
 
 def test_getFiveYearChange(startClass):
-    change = startClass.getFiveYearChangey()
-    assert change == 1.10
+    change = startClass.getFiveYearChange()
+    assert change == 1.1
+
+def test_getThreeYearChange(startClass):
+    change = startClass.getThreeYearChange()
+    assert change == 0.8
+
+def test_getOneYearChange(startClass):
+    change = startClass.getOneYearChange()
+    assert change == -0.13
