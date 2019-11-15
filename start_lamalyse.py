@@ -1,6 +1,9 @@
-from src.manager.lamalyse import Lamalyse
-debug = True
+import socket
 
+from src.manager.lamalyse import Lamalyse
+debug = False
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.settimeout(2000)
 stockArray = [
     'UBER',
     'LYFT',
