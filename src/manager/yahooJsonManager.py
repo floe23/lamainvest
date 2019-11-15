@@ -261,7 +261,7 @@ class YahooJsonManager(object):
     def setDividendYieldRating(self):
         dividendYield = self.getDividendYield()
         if dividendYield > 0.01 and dividendYield < 0.05:
-            return "+"
+            return "😃"
         else:
             return "-"
 
@@ -302,6 +302,9 @@ class YahooJsonManager(object):
         returnOnEquityRating = self.setReturnOnEquityRating()
 
         newJsonData = {
+            'stockPriceFiveYearChange' : stockPriceFiveYearChange,
+            'stockPriceThreeYearChange' : stockPriceThreeYearChange,
+            'stockPriceOneYearChange' : stockPriceOneYearChange,
             'buyRating' : buyingRating,
             'earningsYearlyRating' : earningsYearlyRating,
             'earningsQuarterlyRating' : earningsQuarterlyRating,
@@ -310,19 +313,16 @@ class YahooJsonManager(object):
             'payoutRatioRating' : payoutRatioRating,
             'returnOnEquityRating' : returnOnEquityRating,
             'revenueYearlyRating' : revenueYearlyRating,
+            'price' : jsonData['price']['regularMarketPrice']['raw'],
             'stockSymbol' : self.stockSymbol,
             'shortName' : jsonData['quoteType']['shortName'],
             'returnOnEquity' : returnOnEquity,
             'dividendYield' : dividendYield,
             'priceToEarnings' : priceToEarnings,
-            'price' : jsonData['price']['regularMarketPrice']['raw'],
             'payoutRatio' : jsonData['summaryDetail']['payoutRatio']['raw'],
             'yearlyRevenueTendency' : yearlyRevenueTendency,
             'yearlyEarningsTendency' : yearlyEarningsTendency,
             'quarterlyEarningsTendency' : quarterlyEarningsTendency,
-            'stockPriceFiveYearChange' : stockPriceFiveYearChange,
-            'stockPriceThreeYearChange' : stockPriceThreeYearChange,
-            'stockPriceOneYearChange' : stockPriceOneYearChange,
             'longBusinessSummary' : jsonData['summaryProfile']['longBusinessSummary'],
         }
         return newJsonData

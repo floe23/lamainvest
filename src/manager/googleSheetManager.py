@@ -59,6 +59,7 @@ class GoogleSheetManager(object):
                 # print('%s, %s' % (row[0], row[4]))
 
     def writeData(self,data):
+        print("start writing data to google sheet")
         sheet = self.iniSheet()
 
         body = {
