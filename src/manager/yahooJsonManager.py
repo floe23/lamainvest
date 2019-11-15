@@ -76,16 +76,16 @@ class YahooJsonManager(object):
         earningsPerShare = jsonData['defaultKeyStatistics']['forwardEps']['raw']
         priceToEarnings = pricePerShare / earningsPerShare
         if priceToEarnings < PeRatingBelow_1:
-            return 1
+            return "+++"
         if priceToEarnings < PeRatingBelow_2:
-            return 2
+            return "++"
         if priceToEarnings < PeRatingBelow_3:
-            return 3
+            return "+"
         if priceToEarnings < PeRatingBelow_4:
-            return 4
+            return "-"
         if priceToEarnings < PeRatingBelow_5:
-            return 5
-        return 6
+            return "--"
+        return "---"
 
 
     def getRevenueListYearly(self):
@@ -179,16 +179,16 @@ class YahooJsonManager(object):
         priceBelowHighRate_4 = 0.4
         priceBelowHighRate_5 = 0.2
         if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_1:
-            return 1
+            return "+++"
         if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_2:
-            return 2
+            return "++"
         if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_3:
-            return 3
+            return "+"
         if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_4:
-            return 4
+            return "-"
         if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_5:
-            return 5
-        return 6
+            return "--"
+        return "---"
 
     def calculateGrowthRating(self, tendency):
         print("tendency",tendency)
@@ -198,16 +198,16 @@ class YahooJsonManager(object):
         tendency_mark_4 = 0.15
         tendency_mark_5 = 0.1
         if tendency >= tendency_mark_1:
-            return 1
+            return "+++"
         if tendency >= tendency_mark_2:
-            return 2
+            return "++"
         if tendency >= tendency_mark_3:
-            return 3
+            return "+"
         if tendency >= tendency_mark_4:
-            return 4
+            return "-"
         if tendency >= tendency_mark_5:
-            return 5
-        return 6
+            return "--"
+        return "---"
 
 
     def getPriceRating(self):
@@ -263,21 +263,21 @@ class YahooJsonManager(object):
         if dividendYield > 0.01 and dividendYield < 0.05:
             return "😃"
         else:
-            return "-"
+            return "🙁"
 
     def setPayoutRatioRating(self):
         payoutRatio =  self.jsonDataDetail['summaryDetail']['payoutRatio']['raw']
         if payoutRatio < 0.6:
-            return "+"
+            return "😃"
         else:
-            return "-"
+            return "🙁"
 
     def setReturnOnEquityRating(self):
         returnOnEquity = self.getReturnOnEquity()
         if returnOnEquity > 0.1:
-            return "+"
+            return "😃"
         else:
-            return "-"
+            return "🙁"
 
     def getKeyData(self):
         jsonData = self.jsonDataDetail

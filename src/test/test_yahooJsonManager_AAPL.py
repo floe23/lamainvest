@@ -38,19 +38,19 @@ def test_getKeyData(startClass):
     assert keyData['price'] == 194.19
     assert keyData['payoutRatio'] == 0.2446
     assert keyData['yearlyRevenueTendency'] == 0.14
-    assert keyData['revenueYearlyRating'] == 5
+    assert keyData['revenueYearlyRating'] == "--"
     assert keyData['yearlyEarningsTendency'] == 0.15
     assert keyData['quarterlyEarningsTendency'] == 0.22
-    assert keyData['earningsYearlyRating'] == 4
-    assert keyData['earningsQuarterlyRating'] == 3
-    assert keyData['buyRating'] == 6
-    assert keyData['peRating'] == 2
+    assert keyData['earningsYearlyRating'] == "-"
+    assert keyData['earningsQuarterlyRating'] == "+"
+    assert keyData['buyRating'] == "---"
+    assert keyData['peRating'] == "++"
     assert keyData['stockPriceFiveYearChange'] == 1.1
     assert keyData['stockPriceThreeYearChange'] == 0.8
     assert keyData['stockPriceOneYearChange'] == -0.13
-    assert keyData['dividendYieldRating'] == "+"
-    assert keyData['payoutRatioRating'] == "+"
-    assert keyData['returnOnEquityRating'] == "+"
+    assert keyData['dividendYieldRating'] == "😃"
+    assert keyData['payoutRatioRating'] == "😃"
+    assert keyData['returnOnEquityRating'] == "😃"
 
 
 def test_calculateGrowthSum(startClass):
@@ -60,35 +60,35 @@ def test_calculateGrowthSum(startClass):
 
 def test_calculatePriceRating(startClass):
     priceRating = startClass.calculatePriceRating(1,400)
-    assert priceRating == 1
+    assert priceRating == "+++"
     priceRating = startClass.calculatePriceRating(70,400)
-    assert priceRating == 2
+    assert priceRating == "++"
     priceRating = startClass.calculatePriceRating(200,400)
-    assert priceRating == 3
+    assert priceRating == "+"
     priceRating = startClass.calculatePriceRating(235,400)
-    assert priceRating == 4
+    assert priceRating == "-"
     priceRating = startClass.calculatePriceRating(315,400)
-    assert priceRating == 5
+    assert priceRating == "--"
     priceRating = startClass.calculatePriceRating(355,400)
-    assert priceRating == 6
+    assert priceRating == "---"
     priceRating = startClass.calculatePriceRating(450,400)
-    assert priceRating == 6
+    assert priceRating == "---"
 
 def test_calculateGrowthRating(startClass):
     tendencyRating = startClass.calculateGrowthRating(0.6)
-    assert tendencyRating == 1
+    assert tendencyRating == "+++"
     tendencyRating = startClass.calculateGrowthRating(0.4)
-    assert tendencyRating == 2
+    assert tendencyRating == "++"
     tendencyRating = startClass.calculateGrowthRating(0.2)
-    assert tendencyRating == 3
+    assert tendencyRating == "+"
     tendencyRating = startClass.calculateGrowthRating(0.15)
-    assert tendencyRating == 4
+    assert tendencyRating == "-"
     tendencyRating = startClass.calculateGrowthRating(0.1)
-    assert tendencyRating == 5
+    assert tendencyRating == "--"
     tendencyRating = startClass.calculateGrowthRating(0.03)
-    assert tendencyRating == 6
+    assert tendencyRating == "---"
     tendencyRating = startClass.calculateGrowthRating(-1)
-    assert tendencyRating == 6
+    assert tendencyRating == "---"
 
 def test_getRevenueListYearly(startClass):
     earningsList = startClass.getRevenueListYearly()
