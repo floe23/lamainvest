@@ -1,5 +1,5 @@
-from manager.yahooJsonManager import YahooJsonManager
-from manager.googleSheetManager import GoogleSheetManager
+from src.manager.yahooJsonManager import YahooJsonManager
+from src.manager.googleSheetManager import GoogleSheetManager
 
 class Lamalyse(object):
 
