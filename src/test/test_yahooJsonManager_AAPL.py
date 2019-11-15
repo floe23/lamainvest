@@ -29,18 +29,25 @@ def startClass():
 def test_getKeyData(startClass):
     startClass.jsonDataDetail=testJson
     keyData = startClass.getKeyData()
+    assert keyData['stockSymbol'] == 'AAPL'
     assert keyData['shortName'] == 'Apple Inc.'
     assert len(keyData['longBusinessSummary']) >= 50
     assert keyData['returnOnEquity'] == 0.49128
     assert keyData['dividendYield'] == 0.0176
-    assert keyData['payoutRatio'] == 0.2446
-    assert keyData['price'] == 194.19
     assert keyData['priceToEarnings'] == 194.19/12.69
+    assert keyData['price'] == 194.19
+    assert keyData['payoutRatio'] == 0.2446
+    assert keyData['yearlyRevenueTendency'] == 0.14
+    assert keyData['revenueYearlyRating'] == 5
+    assert keyData['yearlyEarningsTendency'] == 0.15
+    assert keyData['quarterlyEarningsTendency'] == 0.22
+    assert keyData['earningsYearlyRating'] == 4
+    assert keyData['earningsQuarterlyRating'] == 3
     assert keyData['buyRating'] == 6
     assert keyData['peRating'] == 2
-    assert keyData['earningsQuarterlyRating'] == 3
-    assert keyData['earningsYearlyRating'] == 4
-    assert keyData['revenueYearlyRating'] == 5
+    assert keyData['stockPriceFiveYearChange'] == 1.1
+    assert keyData['stockPriceThreeYearChange'] == 0.8
+    assert keyData['stockPriceOneYearChange'] == -0.13
 
 
 def test_calculateGrowthSum(startClass):
@@ -94,9 +101,6 @@ def test_getRevenueListYearly(startClass):
 
 # Start fake data test
 # calculations are in https://docs.google.com/spreadsheets/d/1OeHKTNaILDhxKtBjxPUjetWIe_fima1dj-PGf_a_AMw/edit#gid=182350962
-def test_getRevenueListYearlyTendency(startClass):
-    tendency = startClass.getRevenueListYearlyTendency()
-    assert tendency == 0.14
 
 
 def test_getRevenueListQuarterlyTendency(startClass):
@@ -113,22 +117,3 @@ def test_getEarningsListYearly(startClass):
     assert earningsList == [53394000000, 45687000000, 48351000000, 59531000000]
 #
 #
-def test_getEarningsListQuartarlyTendency(startClass):
-    tendency = startClass.getEarningsListQuartarlyTendency()
-    assert tendency == 0.22
-
-def test_getEarningsListYearlyTendency(startClass):
-    tendency = startClass.getEarningsListYearlyTendency()
-    assert tendency == 0.15
-
-def test_getFiveYearChange(startClass):
-    change = startClass.getFiveYearChange()
-    assert change == 1.1
-
-def test_getThreeYearChange(startClass):
-    change = startClass.getThreeYearChange()
-    assert change == 0.8
-
-def test_getOneYearChange(startClass):
-    change = startClass.getOneYearChange()
-    assert change == -0.13

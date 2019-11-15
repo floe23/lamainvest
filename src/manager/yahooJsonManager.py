@@ -274,6 +274,9 @@ class YahooJsonManager(object):
         earningsYearlyRating = self.calculateGrowthRating(yearlyEarningsTendency)
         dividendYield = self.getDividendYield()
         returnOnEquity = self.getReturnOnEquity()
+        stockPriceFiveYearChange = self.getFiveYearChange()
+        stockPriceThreeYearChange = self.getThreeYearChange()
+        stockPriceOneYearChange = self.getOneYearChange()
 
         newJsonData = {
             'stockSymbol' : self.stockSymbol,
@@ -292,5 +295,8 @@ class YahooJsonManager(object):
             'earningsQuarterlyRating' : earningsQuarterlyRating,
             'buyRating' : buyingRating,
             'peRating' : peRating,
+            'stockPriceFiveYearChange' : stockPriceFiveYearChange,
+            'stockPriceThreeYearChange' : stockPriceThreeYearChange,
+            'stockPriceOneYearChange' : stockPriceOneYearChange,
         }
         return newJsonData
