@@ -167,7 +167,6 @@ class YahooJsonManager(object):
         earnings = []
         earningList = jsonData['earnings']['financialsChart']['yearly']
         for earning in earningList:
-            print(earning['earnings']['raw'])
             earnings.append(earning['earnings']['raw'])
         return earnings
 
@@ -191,7 +190,6 @@ class YahooJsonManager(object):
         return "---"
 
     def calculateGrowthRating(self, tendency):
-        print("tendency",tendency)
         tendency_mark_1 = 0.6
         tendency_mark_2 = 0.4
         tendency_mark_3 = 0.2
@@ -235,7 +233,6 @@ class YahooJsonManager(object):
         stockPriceList = self.jsonDataDetailHistory['chart']['result'][0]['indicators']['adjclose'][0]['adjclose']
         stockPriceListLength = len(stockPriceList)
         if stockPriceListLength > 20:
-            print(stockPriceListLength)
             today = stockPriceList[stockPriceListLength-1]
             fiveYearsAgo = stockPriceList[stockPriceListLength-21]
             growth = (today-fiveYearsAgo)/fiveYearsAgo
@@ -247,7 +244,6 @@ class YahooJsonManager(object):
         stockPriceList = self.jsonDataDetailHistory['chart']['result'][0]['indicators']['adjclose'][0]['adjclose']
         stockPriceListLength = len(stockPriceList)
         if stockPriceListLength > 20:
-            print(stockPriceListLength)
             today = stockPriceList[stockPriceListLength-1]
             fiveYearsAgo = stockPriceList[stockPriceListLength-13]
             growth = (today-fiveYearsAgo)/fiveYearsAgo
@@ -258,7 +254,6 @@ class YahooJsonManager(object):
     def getOneYearChange(self):
         stockPriceList = self.jsonDataDetailHistory['chart']['result'][0]['indicators']['adjclose'][0]['adjclose']
         stockPriceListLength = len(stockPriceList)
-        print(stockPriceListLength)
         today = stockPriceList[stockPriceListLength-1]
         fiveYearsAgo = stockPriceList[stockPriceListLength-5]
         growth = (today-fiveYearsAgo)/fiveYearsAgo
