@@ -329,6 +329,6 @@ class YahooJsonManager(object):
             'yearlyRevenueTendency' : yearlyRevenueTendency,
             'yearlyEarningsTendency' : yearlyEarningsTendency,
             'quarterlyEarningsTendency' : quarterlyEarningsTendency,
-            'longBusinessSummary' : jsonData['summaryProfile']['longBusinessSummary'],
+            # 'longBusinessSummary' : jsonData['summaryProfile']['longBusinessSummary'],
         }
         return newJsonData

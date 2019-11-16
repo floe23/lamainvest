@@ -91,3 +91,7 @@ recommendationTrend
 
     Wenn Du das graphisch Zeichnen willst ist das zweite einfacher. Wenn Du ohne grafisch zu zeichnen nur den Trend haben willst wäre es das erste und Du guckst nur, ob im Beispiel m<>0 ist
     Also wenn Du es mathematisch ordentlich haben möchtest
+
+
+
+PeRating

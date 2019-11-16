@@ -1,7 +1,7 @@
 import socket
 
 from src.manager.lamalyse import Lamalyse
-debug = False
+debug = True
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.settimeout(2000)
 stockArray = [
@@ -12,13 +12,12 @@ stockArray = [
     'GOOG',
     'AAPL',
                ]
-
-
 analyser = Lamalyse()
 analyser.debug = debug
 
 if debug :
-    data = analyser.start('AAPL',2)
+    data = analyser.createCsv(['AAPL'])
+    print(data)
 else:
     counter = 1
     for stock in stockArray:
