@@ -331,7 +331,6 @@ class YahooJsonManager(object):
         buyingRating = self.getPriceRating()
 
         newJsonData = {
-            'priceMax' : self.priceMaxHigh,
             'stockPriceFiveYearChange' : stockPriceFiveYearChange,
             'stockPriceThreeYearChange' : stockPriceThreeYearChange,
             'stockPriceOneYearChange' : stockPriceOneYearChange,
@@ -353,6 +352,7 @@ class YahooJsonManager(object):
             'yearlyRevenueTendency' : yearlyRevenueTendency,
             'yearlyEarningsTendency' : yearlyEarningsTendency,
             'quarterlyEarningsTendency' : quarterlyEarningsTendency,
+            'priceMax' : self.priceMaxHigh,
             # 'longBusinessSummary' : jsonData['summaryProfile']['longBusinessSummary'],
         }
         return newJsonData
