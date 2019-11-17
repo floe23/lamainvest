@@ -27,19 +27,43 @@ class Lamalyse(object):
         self.yahooJsonManager.debug = self.debug
         stockSymbolList = self.stockSymbolList
         dataList = []
+        data = []
+        counter = 0
+        max = len(stockSymbolList)
         for stock in stockSymbolList:
-            data = self.yahooJsonManager.getStockInfo(stock)
-            dataList.append(data)
+            stock = stock.upper()
+            counter = counter + 1
+            try:
+                printMsg = "{0}/{1}".format(counter,max)
+                print("get data for:", stock)
+                data = self.yahooJsonManager.getStockInfo(stock)
+                dataList.append(data)
+            except Exception as e:
+                print("error:", e)
         self.dataJsonYahooInfo = data
         self.dataList = dataList
         return dataList
 
     def writeDataToCsv(self):
-        row = ["moin","moin"]
+        dataList = self.createDataValueList()
         csvfile = "src/data/data.csv"
         with open(csvfile, 'w') as writeFile:
             writer = csv.writer(writeFile)
-            writer.writerow(row)
+            writer.writerows(dataList)
+
+    def createDataValueList(self):
+        jsonDataList = self.dataList
+        dataList = []
+        keys = []
+        for key in jsonDataList[0].keys():
+            keys.append(key)
+        dataList.append(keys)
+        for jsonData in jsonDataList:
+            dataValues = []
+            for dataValue in jsonData.values():
+                dataValues.append(dataValue)
+            dataList.append(dataValues)
+        return dataList
 
 
     def writeKeysToSheet(self):

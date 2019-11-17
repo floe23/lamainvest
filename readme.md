@@ -26,6 +26,7 @@ https://docs.google.com/spreadsheets/d/1OeHKTNaILDhxKtBjxPUjetWIe_fima1dj-PGf_a_
 Todo:
 remove hard codedd api keys or move them to gitignore file  
 
+create csv with date 
 
 last 5 year growth  
 
