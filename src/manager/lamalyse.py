@@ -33,21 +33,23 @@ class Lamalyse(object):
         for stock in stockSymbolList:
             stock = stock.upper()
             counter = counter + 1
-            try:
-                printMsg = "{0}/{1}".format(counter,max)
-                print("get data for:", stock)
-                data = self.yahooJsonManager.getStockInfo(stock)
+            printMsg = "{0}/{1}".format(counter,max)
+            data = self.getDataFromApi(stock)
+            if data:
                 dataList.append(data)
-            except Exception as e:
-                try:
-                    data = self.yahooJsonManager.getStockInfo(stock)
-                    dataList.append(data)
-                except:
-                    print("error again:", e)
-                print("error:", e)
         self.dataJsonYahooInfo = data
         self.dataList = dataList
         return dataList
+
+    def getDataFromApi(self,stock):
+        for i in range(0,5):
+            try:
+                print("get data for:", stock)
+                data = self.yahooJsonManager.getStockInfo(stock)
+                return data
+            except:
+                print("error again:", e)
+        return False
 
     def writeDataToCsv(self):
         dataList = self.createDataValueList()
