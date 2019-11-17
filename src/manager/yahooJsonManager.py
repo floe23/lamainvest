@@ -71,25 +71,25 @@ class YahooJsonManager(object):
 
     def calculatePeRating(self):
         jsonData = self.jsonDataDetail
-        PeRatingBelow_1 = 5
-        PeRatingBelow_2 = 10
-        PeRatingBelow_3 = 15
-        PeRatingBelow_4 = 25
-        PeRatingBelow_5 = 50
+        PeRatingBelow_10 = 5
+        PeRatingBelow_9 = 10
+        PeRatingBelow_8 = 15
+        PeRatingBelow_7 = 25
+        PeRatingBelow_6 = 50
         pricePerShare = jsonData['price']['regularMarketPrice']['raw']
         earningsPerShare = jsonData['defaultKeyStatistics']['forwardEps']['raw']
         priceToEarnings = pricePerShare / earningsPerShare
-        if priceToEarnings < PeRatingBelow_1:
+        if priceToEarnings < PeRatingBelow_10:
             return 10
-        if priceToEarnings < PeRatingBelow_2:
+        if priceToEarnings < PeRatingBelow_9:
             return 9
-        if priceToEarnings < PeRatingBelow_3:
+        if priceToEarnings < PeRatingBelow_8:
             return 8
-        if priceToEarnings < PeRatingBelow_4:
+        if priceToEarnings < PeRatingBelow_7:
             return 7
-        if priceToEarnings < PeRatingBelow_5:
+        if priceToEarnings < PeRatingBelow_6:
             return 6
-        return 5
+        return 0
 
 
     def getRevenueListYearly(self):
