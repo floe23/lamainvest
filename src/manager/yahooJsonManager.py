@@ -25,6 +25,10 @@ class YahooJsonManager(object):
             self.jsonDataDetail = apiManager.getYahooStockDetail(stockSymbol)
             self.jsonDataDetailHistory = apiManager.getYahooStockHistory(stockSymbol)
 
+    def doCalculations(self):
+        self.setPriceMaxHigh()
+
+
     def getTestJsonDetail(self):
         with open('src/test/testDataDetail_AAPL.json', 'r') as myfile:
             testJson=myfile.read()
@@ -67,25 +71,25 @@ class YahooJsonManager(object):
 
     def calculatePeRating(self):
         jsonData = self.jsonDataDetail
-        PeRatingBelow_1 = 15
-        PeRatingBelow_2 = 20
-        PeRatingBelow_3 = 25
-        PeRatingBelow_4 = 30
-        PeRatingBelow_5 = 35
+        PeRatingBelow_1 = 5
+        PeRatingBelow_2 = 10
+        PeRatingBelow_3 = 15
+        PeRatingBelow_4 = 25
+        PeRatingBelow_5 = 50
         pricePerShare = jsonData['price']['regularMarketPrice']['raw']
         earningsPerShare = jsonData['defaultKeyStatistics']['forwardEps']['raw']
         priceToEarnings = pricePerShare / earningsPerShare
         if priceToEarnings < PeRatingBelow_1:
-            return "+++"
+            return 10
         if priceToEarnings < PeRatingBelow_2:
-            return "++"
+            return 9
         if priceToEarnings < PeRatingBelow_3:
-            return "+"
+            return 8
         if priceToEarnings < PeRatingBelow_4:
-            return "-"
+            return 7
         if priceToEarnings < PeRatingBelow_5:
-            return "--"
-        return "---"
+            return 6
+        return 5
 
 
     def getRevenueListYearly(self):
@@ -172,22 +176,37 @@ class YahooJsonManager(object):
 
 
     def calculatePriceRating(self, price, fiftyTwoWeekHigh):
-        priceBelowHighRate_1 = 0.98
-        priceBelowHighRate_2 = 0.8
-        priceBelowHighRate_3 = 0.5
-        priceBelowHighRate_4 = 0.4
-        priceBelowHighRate_5 = 0.2
-        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_1:
-            return "+++"
-        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_2:
-            return "++"
-        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_3:
-            return "+"
-        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_4:
-            return "-"
+        priceBelowHighRate_10 = 0.5
+        priceBelowHighRate_9 = 0.45
+        priceBelowHighRate_8 = 0.4
+        priceBelowHighRate_7 = 0.35
+        priceBelowHighRate_6 = 0.3
+        priceBelowHighRate_5 = 0.25
+        priceBelowHighRate_4 = 0.2
+        priceBelowHighRate_3 = 0.15
+        priceBelowHighRate_2 = 0.1
+        priceBelowHighRate_1 = 0.05
+        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_10:
+            return 10
+        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_9:
+            return 9
+        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_8:
+            return 8
+        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_7:
+            return 7
+        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_6:
+            return 6
         if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_5:
-            return "--"
-        return "---"
+            return 5
+        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_4:
+            return 4
+        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_3:
+            return 3
+        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_2:
+            return 2
+        if (1 - (price / fiftyTwoWeekHigh)) >= priceBelowHighRate_1:
+            return 1
+        return 0
 
     def calculateGrowthRating(self, tendency):
         tendency_mark_1 = 0.6
@@ -196,21 +215,22 @@ class YahooJsonManager(object):
         tendency_mark_4 = 0.15
         tendency_mark_5 = 0.1
         if tendency >= tendency_mark_1:
-            return "+++"
+            return 10
         if tendency >= tendency_mark_2:
-            return "++"
+            return 9
         if tendency >= tendency_mark_3:
-            return "+"
+            return 8
         if tendency >= tendency_mark_4:
-            return "-"
+            return 7
         if tendency >= tendency_mark_5:
-            return "--"
-        return "---"
+            return 6
+        return 5
 
 
     def getPriceRating(self):
 
         price = self.jsonDataDetail['price']['regularMarketPrice']['raw']
+        fiftyTwoWeekHigh = self.jsonDataDetail['quoteData'][self.stockSymbol]['fiftyTwoWeekHigh']['raw']
         fiftyTwoWeekHigh = self.jsonDataDetail['quoteData'][self.stockSymbol]['fiftyTwoWeekHigh']['raw']
         priceRating = self.calculatePriceRating(price, fiftyTwoWeekHigh)
         return priceRating
@@ -228,6 +248,13 @@ class YahooJsonManager(object):
             return returnOnEquity
         except:
             return 0
+
+    def setPriceMaxHigh(self):
+        stockPriceList = self.jsonDataDetailHistory['chart']['result'][0]['indicators']['adjclose'][0]['adjclose']
+        priceMaxHigh = max(stockPriceList)
+        self.priceMaxHigh = priceMaxHigh
+
+
 
     def getFiveYearChange(self):
         stockPriceList = self.jsonDataDetailHistory['chart']['result'][0]['indicators']['adjclose'][0]['adjclose']
@@ -281,11 +308,11 @@ class YahooJsonManager(object):
             return "🙁"
 
     def getKeyData(self):
+        self.doCalculations()
         jsonData = self.jsonDataDetail
         pricePerShare = jsonData['price']['regularMarketPrice']['raw']
         earningsPerShare = jsonData['defaultKeyStatistics']['forwardEps']['raw']
         priceToEarnings = pricePerShare / earningsPerShare
-        buyingRating = self.getPriceRating()
         peRating = self.calculatePeRating()
         yearlyRevenueTendency = self.getRevenueListYearlyTendency()
         revenueYearlyRating = self.calculateGrowthRating(yearlyRevenueTendency)
@@ -301,8 +328,10 @@ class YahooJsonManager(object):
         dividendYieldRating = self.setDividendYieldRating()
         payoutRatioRating = self.setPayoutRatioRating()
         returnOnEquityRating = self.setReturnOnEquityRating()
+        buyingRating = self.getPriceRating()
 
         newJsonData = {
+            'priceMax' : self.priceMaxHigh,
             'stockPriceFiveYearChange' : stockPriceFiveYearChange,
             'stockPriceThreeYearChange' : stockPriceThreeYearChange,
             'stockPriceOneYearChange' : stockPriceOneYearChange,
