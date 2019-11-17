@@ -47,8 +47,9 @@ class Lamalyse(object):
                 print("get data for:", stock)
                 data = self.yahooJsonManager.getStockInfo(stock)
                 return data
-            except:
-                print("error again:", e)
+            except Exception as e:
+                print("error:", e)
+                print("try again:", stock)
         return False
 
     def writeDataToCsv(self):
