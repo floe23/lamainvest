@@ -17,15 +17,13 @@ class Lamalyse(object):
         self.writeDataToSheet()
 
     def createCsv(self,stockSymbolList):
-        self.stockSymbolList = stockSymbolList
-        self.getYahooDataInfo()
+        self.getYahooDataInfo(stockSymbolList)
         self.writeDataToCsv()
 
 
-    def getYahooDataInfo(self):
+    def getYahooDataInfo(self, stockSymbolList):
         self.yahooJsonManager = YahooJsonManager()
         self.yahooJsonManager.debug = self.debug
-        stockSymbolList = self.stockSymbolList
         dataList = []
         data = []
         counter = 0

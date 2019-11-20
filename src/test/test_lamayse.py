@@ -14,8 +14,7 @@ testJsonHist = json.loads(testJsonHist)
 def startClass():
     startClass = Lamalyse()
     startClass.debug = True
-    startClass.stockSymbolList = ['AAPL']
-    startClass.getYahooDataInfo()
+    startClass.getYahooDataInfo(['AAPL'])
     return startClass
 
 #comment this for not exeeding limit by testing
