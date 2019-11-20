@@ -35,7 +35,7 @@ summerize ratings
 check etf  
 do check of 1000 companies
 create big scv to anylize with pandas
-
+calculate price to buy
 
 
 questions to answer
