@@ -69,6 +69,8 @@ class Lamalyse(object):
         for jsonData in jsonDataList:
             dataValues = []
             for dataValue in jsonData.values():
+                if not isinstance(dataValue, str):
+                    dataValue = round(dataValue,2)
                 dataValues.append(dataValue)
             dataList.append(dataValues)
         return dataList

@@ -27,12 +27,14 @@ Todo:
 remove hard codedd api keys or move them to gitignore file  
 
 create csv with date
-
 last 5 year growth  
-
 api host and api key to constructor
-
 call one etf and get the data
+format output
+summerize ratings   
+check etf  
+do check of 1000 companies
+create big scv to anylize with pandas
 
 
 
@@ -52,5 +54,11 @@ ai to predict course?
 Display graphs?
 
 Roadmap:
-decisiont tree? 
+decisiont tree?
 etf  
+
+Set realistic buy price for limit order
+Summery of some ratings   
+
+
+Check every morning for pice calculateGrowthSum

@@ -1,3 +1,2 @@
 stockPriceFiveYearChange,stockPriceThreeYearChange,stockPriceOneYearChange,buyRating,earningsYearlyRating,earningsQuarterlyRating,peRating,dividendYieldRating,payoutRatioRating,returnOnEquityRating,revenueYearlyRating,price,stockSymbol,shortName,returnOnEquity,dividendYield,priceToEarnings,payoutRatio,yearlyRevenueTendency,yearlyEarningsTendency,quarterlyEarningsTendency,priceMax
-0.56,0.48,0.12,1,8,7,6,😃,🙁,😃,5,104.83,NSRGF,NESTLE SA,0.1765,0.0232,27.65963060686016,0.7853,0.03,0.2,0.15,106.5
-2.71,0.94,-0.2,4,10,10,0,🙁,😃,😃,10,295.03,NFLX,"Netflix, Inc.",0.2382,0,53.641818181818174,0,0.98,3.68,2.81,370.5400085449219
+1.96,0.53,0.01,0,10,5,8,😃,🙁,😃,10,311.51,AVGO,Broadcom Inc.,0.12,0.03,13.41,1.35,1.45,5.94,-0.08,317.7
