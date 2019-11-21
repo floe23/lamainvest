@@ -3,23 +3,31 @@ import numpy as np
 
 class CalculationManager(object):
 
-    def __init__(self,jsonData):
-        self.jsonData = jsonData
+    def __init__(self,allData):
+        self.allData = allData
+        self.keyData = self.allData['keyData']
+        self.jsonDataDetail = self.allData['jsonDataDetail']
+        self.jsonDataDetailHistory = self.allData['jsonDataDetailHistory']
         self.doCalculations()
 
     def doCalculations(self):
         self.setPriceMaxHigh()
         self.getRevenueListYearlyTendency()
         #user from own json
-        self.calculateGrowthRating(yearlyRevenueTendency)
         self.getEarningsListYearlyTendency()
         self.getEarningsListQuartarlyTendency()
-        self.getDividendYield()
-        self.getReturnOnEquity()
         self.getFiveYearChange()
         self.getThreeYearChange()
         self.getOneYearChange()
+        self.updateAllData()
 
+    def updateAllData(self):
+        self.allData['keyData'] = self.keyData
+
+    def setPriceMaxHigh(self):
+        stockPriceList = self.jsonDataDetailHistory['chart']['result'][0]['indicators']['adjclose'][0]['adjclose']
+        priceMaxHigh = max(stockPriceList)
+        self.keyData['priceMaxHigh'] = priceMaxHigh
 
     def calculateGrowthSlope(self,mylist):
 
@@ -51,7 +59,7 @@ class CalculationManager(object):
     def getRevenueListYearlyTendency(self):
         list = self.getRevenueListYearly()
         tendency = self.calculateGrowthSum(list)
-        return tendency
+        self.keyData['yearlyRevenueTendency'] = tendency
 
     def getRevenueListQuarterlyTendency(self):
         list = self.getRevenueListQuarterly()
@@ -84,7 +92,7 @@ class CalculationManager(object):
         if not positiveGrowth:
             return -1
         tendency = self.calculateGrowthSum(earningsList)
-        return tendency
+        self.keyData['quarterlyEarningsTendency'] = tendency
 
     def getEarningsListYearlyTendency(self):
         earningsList = self.getEarningsListYearly()
@@ -92,39 +100,73 @@ class CalculationManager(object):
         if not positiveGrowth:
             return -1
         tendency = self.calculateGrowthSum(earningsList)
-        return tendency
+        self.keyData['yearlyEarningsTendency'] = tendency
 
-    def setPriceMaxHigh(self):
-        stockPriceList = self.jsonDataDetailHistory['chart']['result'][0]['indicators']['adjclose'][0]['adjclose']
-        priceMaxHigh = max(stockPriceList)
-        self.priceMaxHigh = priceMaxHigh
+
 
     def getFiveYearChange(self):
+        change = 0
         stockPriceList = self.jsonDataDetailHistory['chart']['result'][0]['indicators']['adjclose'][0]['adjclose']
         stockPriceListLength = len(stockPriceList)
         if stockPriceListLength > 20:
             today = stockPriceList[stockPriceListLength-1]
             fiveYearsAgo = stockPriceList[stockPriceListLength-21]
             growth = (today-fiveYearsAgo)/fiveYearsAgo
-            return round(growth, 2)
-        else:
-            return 0
+            change = round(growth, 2)
+        self.keyData['stockPriceFiveYearChange'] = change
+
 
     def getThreeYearChange(self):
+        change = 0
         stockPriceList = self.jsonDataDetailHistory['chart']['result'][0]['indicators']['adjclose'][0]['adjclose']
         stockPriceListLength = len(stockPriceList)
-        if stockPriceListLength > 20:
+        if stockPriceListLength > 12:
             today = stockPriceList[stockPriceListLength-1]
             fiveYearsAgo = stockPriceList[stockPriceListLength-13]
             growth = (today-fiveYearsAgo)/fiveYearsAgo
-            return round(growth, 2)
-        else:
-            return 0
+            change = round(growth, 2)
+        self.keyData['stockPriceThreeYearChange'] = change
 
     def getOneYearChange(self):
+        change = 0
         stockPriceList = self.jsonDataDetailHistory['chart']['result'][0]['indicators']['adjclose'][0]['adjclose']
         stockPriceListLength = len(stockPriceList)
-        today = stockPriceList[stockPriceListLength-1]
-        fiveYearsAgo = stockPriceList[stockPriceListLength-5]
-        growth = (today-fiveYearsAgo)/fiveYearsAgo
-        return round(growth, 2)
+        if stockPriceListLength > 4:
+            today = stockPriceList[stockPriceListLength-1]
+            fiveYearsAgo = stockPriceList[stockPriceListLength-5]
+            growth = (today-fiveYearsAgo)/fiveYearsAgo
+            change = round(growth, 2)
+        self.keyData['stockPriceOneYearChange'] = change
+
+    def getRevenueListYearly(self):
+        jsonData = self.jsonDataDetail
+        newEarningList = []
+        earningList = jsonData['earnings']['financialsChart']['yearly']
+        for earning in earningList:
+            revenue = earning['revenue']['raw']
+            newEarningList.append(revenue)
+        return newEarningList
+
+    def getRevenueListQuarterly(self):
+        jsonData = self.jsonDataDetail
+        newRevenueList = []
+        revenueList = jsonData['earnings']['financialsChart']['quarterly']
+        for revenue in revenueList:
+            newRevenueList.append(revenue['revenue']['raw'])
+        return newRevenueList
+
+    def getEarningsListQuartarly(self):
+        jsonData = self.jsonDataDetail
+        earnings = []
+        earningList = jsonData['earnings']['financialsChart']['quarterly']
+        for earning in earningList:
+            earnings.append(earning['earnings']['raw'])
+        return earnings
+
+    def getEarningsListYearly(self):
+        jsonData = self.jsonDataDetail
+        earnings = []
+        earningList = jsonData['earnings']['financialsChart']['yearly']
+        for earning in earningList:
+            earnings.append(earning['earnings']['raw'])
+        return earnings

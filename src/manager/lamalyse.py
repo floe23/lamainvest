@@ -2,6 +2,8 @@ import csv
 
 from src.manager.yahooJsonManager import YahooJsonManager
 from src.manager.googleSheetManager import GoogleSheetManager
+from src.manager.calculationManager import CalculationManager
+from src.manager.ratingManager import RatingManager
 
 class Lamalyse(object):
 
@@ -40,17 +42,18 @@ class Lamalyse(object):
         return dataList
 
     def getData(self,stock):
-        data = self.getDataFromApi(stock)
-        data = self.setKeyData(data)
-        data = self.setCalculatedValues(data)
-        data = self.setRatings(data)
-        return data
+        allData = self.getDataFromApi(stock)
+        allData = self.setCalculatedValues(allData)
+        # keyData = self.setRatings(keyData)
+        return allData
 
     def setKeyData(self,data):
         return data
 
-    def setCalculatedValues(self,data):
-        return data
+    def setCalculatedValues(self,allData):
+        calculationManager = CalculationManager(allData)
+        allData = calculationManager.allData
+        return allData
 
     def setRatings(self,data):
         return data

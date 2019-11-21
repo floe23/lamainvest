@@ -38,38 +38,7 @@ class YahooJsonManager(object):
         return testJson
 
 
-    def getRevenueListYearly(self):
-        jsonData = self.jsonDataDetail
-        newEarningList = []
-        earningList = jsonData['earnings']['financialsChart']['yearly']
-        for earning in earningList:
-            revenue = earning['revenue']['raw']
-            newEarningList.append(revenue)
-        return newEarningList
 
-    def getRevenueListQuarterly(self):
-        jsonData = self.jsonDataDetail
-        newRevenueList = []
-        revenueList = jsonData['earnings']['financialsChart']['quarterly']
-        for revenue in revenueList:
-            newRevenueList.append(revenue['revenue']['raw'])
-        return newRevenueList
-
-    def getEarningsListQuartarly(self):
-        jsonData = self.jsonDataDetail
-        earnings = []
-        earningList = jsonData['earnings']['financialsChart']['quarterly']
-        for earning in earningList:
-            earnings.append(earning['earnings']['raw'])
-        return earnings
-
-    def getEarningsListYearly(self):
-        jsonData = self.jsonDataDetail
-        earnings = []
-        earningList = jsonData['earnings']['financialsChart']['yearly']
-        for earning in earningList:
-            earnings.append(earning['earnings']['raw'])
-        return earnings
 
 
     def getDividendYield(self):
@@ -119,4 +88,10 @@ class YahooJsonManager(object):
             'priceMax' : 0,
             # 'longBusinessSummary' : jsonData['summaryProfile']['longBusinessSummary'],
         }
-        return newJsonData
+        self.keyData = newJsonData
+        allData = {
+            "jsonDataDetail": self.jsonDataDetail,
+            "jsonDataDetailHistory": self.jsonDataDetailHistory,
+            "keyData": self.keyData
+        }
+        return allData

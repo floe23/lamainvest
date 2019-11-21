@@ -6,9 +6,10 @@ class RatingManager(object):
 
     def __init__(self,jsonData):
         self.jsonData = jsonData
+        self.doCalculations()
+
 
     def doCalculations(self):
-        self.setPriceMaxHigh()
         self.calculatePeRating()
         self.calculateGrowthRating(quarterlyEarningsTendency)
         self.calculateGrowthRating(yearlyEarningsTendency)
