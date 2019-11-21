@@ -87,40 +87,25 @@ class YahooJsonManager(object):
             return 0
 
     def getKeyData(self):
-        self.doCalculations()
         jsonData = self.jsonDataDetail
         pricePerShare = jsonData['price']['regularMarketPrice']['raw']
         earningsPerShare = jsonData['defaultKeyStatistics']['forwardEps']['raw']
         priceToEarnings = pricePerShare / earningsPerShare
-        peRating = self.calculatePeRating()
-        yearlyRevenueTendency = self.getRevenueListYearlyTendency()
-        revenueYearlyRating = self.calculateGrowthRating(yearlyRevenueTendency)
-        yearlyEarningsTendency = self.getEarningsListYearlyTendency()
-        quarterlyEarningsTendency = self.getEarningsListQuartarlyTendency()
-        earningsQuarterlyRating = self.calculateGrowthRating(quarterlyEarningsTendency)
-        earningsYearlyRating = self.calculateGrowthRating(yearlyEarningsTendency)
         dividendYield = self.getDividendYield()
         returnOnEquity = self.getReturnOnEquity()
-        stockPriceFiveYearChange = self.getFiveYearChange()
-        stockPriceThreeYearChange = self.getThreeYearChange()
-        stockPriceOneYearChange = self.getOneYearChange()
-        dividendYieldRating = self.setDividendYieldRating()
-        payoutRatioRating = self.setPayoutRatioRating()
-        returnOnEquityRating = self.setReturnOnEquityRating()
-        buyingRating = self.getPriceRating()
 
         newJsonData = {
-            'stockPriceFiveYearChange' : stockPriceFiveYearChange,
-            'stockPriceThreeYearChange' : stockPriceThreeYearChange,
-            'stockPriceOneYearChange' : stockPriceOneYearChange,
-            'buyRating' : buyingRating,
-            'earningsYearlyRating' : earningsYearlyRating,
-            'earningsQuarterlyRating' : earningsQuarterlyRating,
-            'peRating' : peRating,
-            'dividendYieldRating' : dividendYieldRating,
-            'payoutRatioRating' : payoutRatioRating,
-            'returnOnEquityRating' : returnOnEquityRating,
-            'revenueYearlyRating' : revenueYearlyRating,
+            'stockPriceFiveYearChange' : 0,
+            'stockPriceThreeYearChange' : 0,
+            'stockPriceOneYearChange' : 0,
+            'buyRating' : 0,
+            'earningsYearlyRating' : 0,
+            'earningsQuarterlyRating' : 0,
+            'peRating' : 0,
+            'dividendYieldRating' : 0,
+            'payoutRatioRating' : 0,
+            'returnOnEquityRating' : 0,
+            'revenueYearlyRating' : 0,
             'price' : jsonData['price']['regularMarketPrice']['raw'],
             'stockSymbol' : self.stockSymbol,
             'shortName' : jsonData['quoteType']['shortName'],
@@ -128,10 +113,10 @@ class YahooJsonManager(object):
             'dividendYield' : dividendYield,
             'priceToEarnings' : priceToEarnings,
             'payoutRatio' : jsonData['summaryDetail']['payoutRatio']['raw'],
-            'yearlyRevenueTendency' : yearlyRevenueTendency,
-            'yearlyEarningsTendency' : yearlyEarningsTendency,
-            'quarterlyEarningsTendency' : quarterlyEarningsTendency,
-            'priceMax' : self.priceMaxHigh,
+            'yearlyRevenueTendency' : 0,
+            'yearlyEarningsTendency' : 0,
+            'quarterlyEarningsTendency' : 0,
+            'priceMax' : 0,
             # 'longBusinessSummary' : jsonData['summaryProfile']['longBusinessSummary'],
         }
         return newJsonData

@@ -5,9 +5,21 @@ class CalculationManager(object):
 
     def __init__(self,jsonData):
         self.jsonData = jsonData
+        self.doCalculations()
 
     def doCalculations(self):
         self.setPriceMaxHigh()
+        self.getRevenueListYearlyTendency()
+        #user from own json
+        self.calculateGrowthRating(yearlyRevenueTendency)
+        self.getEarningsListYearlyTendency()
+        self.getEarningsListQuartarlyTendency()
+        self.getDividendYield()
+        self.getReturnOnEquity()
+        self.getFiveYearChange()
+        self.getThreeYearChange()
+        self.getOneYearChange()
+
 
     def calculateGrowthSlope(self,mylist):
 

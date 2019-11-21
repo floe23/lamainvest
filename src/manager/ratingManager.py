@@ -7,6 +7,16 @@ class RatingManager(object):
     def __init__(self,jsonData):
         self.jsonData = jsonData
 
+    def doCalculations(self):
+        self.setPriceMaxHigh()
+        self.calculatePeRating()
+        self.calculateGrowthRating(quarterlyEarningsTendency)
+        self.calculateGrowthRating(yearlyEarningsTendency)
+        self.setDividendYieldRating()
+        self.setPayoutRatioRating()
+        self.setReturnOnEquityRating()
+        self.getPriceRating()
+
     def calculatePeRating(self):
         jsonData = self.jsonDataDetail
         PeRatingBelow_10 = 5
