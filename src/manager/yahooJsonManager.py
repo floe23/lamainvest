@@ -25,10 +25,6 @@ class YahooJsonManager(object):
             self.jsonDataDetail = apiManager.getYahooStockDetail(stockSymbol)
             self.jsonDataDetailHistory = apiManager.getYahooStockHistory(stockSymbol)
 
-    def doCalculations(self):
-        self.setPriceMaxHigh()
-
-
     def getTestJsonDetail(self):
         with open('src/test/testDataDetail_AAPL.json', 'r') as myfile:
             testJson=myfile.read()

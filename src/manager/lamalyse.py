@@ -32,12 +32,28 @@ class Lamalyse(object):
             stock = stock.upper()
             counter = counter + 1
             printMsg = "{0}/{1}".format(counter,max)
-            data = self.getDataFromApi(stock)
+            data = self.getData(stock)
             if data:
                 dataList.append(data)
         self.dataJsonYahooInfo = data
         self.dataList = dataList
         return dataList
+
+    def getData(self,stock):
+        data = self.getDataFromApi(stock)
+        data = self.setKeyData(data)
+        data = self.setCalculatedValues(data)
+        data = self.setRatings(data)
+        return data
+
+    def setKeyData(self,data):
+        return data
+
+    def setCalculatedValues(self,data):
+        return data
+
+    def setRatings(self,data):
+        return data
 
     def getDataFromApi(self,stock):
         for i in range(0,5):
