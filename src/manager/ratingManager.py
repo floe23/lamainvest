@@ -158,7 +158,21 @@ class RatingManager(object):
 
     def calculateReturnOnEquityRating(self):
         returnOnEquity = self.keyData['returnOnEquity']
-        if returnOnEquity > 0.1:
-            return "😃"
+        if returnOnEquity > 0.8:
+            return 10
+        elif returnOnEquity > 0.7:
+            return 9
+        elif returnOnEquity > 0.6:
+            return 8
+        elif returnOnEquity > 0.5:
+            return 7
+        elif returnOnEquity > 0.4:
+            return 6
+        elif returnOnEquity > 0.3:
+            return 5
+        elif returnOnEquity > 0.2:
+            return 4
+        elif returnOnEquity > 0.1:
+            return 3
         else:
-            return "🙁"
+            return 0

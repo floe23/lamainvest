@@ -62,3 +62,10 @@ Summery of some ratings
 
 
 Check every morning for pice calculateGrowthSum
+
+Rating Key Words:
+peRating --> the time it needs to get your money back
+dividendYieldRating --> basically how much dividends are payed, if the price goes down the dividen yield goes up, so its difficult to say, it should be between 2% and 5%
+payoutRatioRating --> relation of earnings and dividends, should be lower then 60% if the payout ratio goes close to 100% the company is not able to do any investements anymore
+returnOnEquityRating --> it tells you how much profit the company does with the shareholders equity, how much profit does the company makes per, the roe should be constantly high, check double digits
+ROIC = net (income - dividends) / total capital

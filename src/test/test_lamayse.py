@@ -51,4 +51,4 @@ def test_setRatings(startClass):
     assert keyData['peRating'] == 7
     assert keyData['dividendYieldRating'] == "😃"
     assert keyData['payoutRatioRating'] == "😃"
-    assert keyData['returnOnEquityRating'] == "😃"
+    assert keyData['returnOnEquityRating'] == 6
