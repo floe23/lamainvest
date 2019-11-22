@@ -64,14 +64,16 @@ class YahooJsonManager(object):
         returnOnEquity = self.getReturnOnEquity()
 
         newJsonData = {
+            'totalRating' : 0,
+            'buyRating' : 0,
+            'buySuggestion' : 0,
+            'dividendYieldRating' : 0,
             'stockPriceFiveYearChange' : 0,
             'stockPriceThreeYearChange' : 0,
             'stockPriceOneYearChange' : 0,
-            'buyRating' : 0,
             'earningsYearlyRating' : 0,
             'earningsQuarterlyRating' : 0,
             'peRating' : 0,
-            'dividendYieldRating' : 0,
             'payoutRatioRating' : 0,
             'returnOnEquityRating' : 0,
             'revenueYearlyRating' : 0,
