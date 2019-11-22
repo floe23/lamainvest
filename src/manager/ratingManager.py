@@ -4,19 +4,59 @@ import numpy as np
 
 class RatingManager(object):
 
-    def __init__(self,jsonData):
-        self.jsonData = jsonData
+    def __init__(self,allData):
+        self.allData = allData
+        self.keyData = self.allData['keyData']
+        self.jsonDataDetail = self.allData['jsonDataDetail']
+        self.jsonDataDetailHistory = self.allData['jsonDataDetailHistory']
         self.doCalculations()
 
 
     def doCalculations(self):
-        self.calculatePeRating()
-        self.calculateGrowthRating(quarterlyEarningsTendency)
-        self.calculateGrowthRating(yearlyEarningsTendency)
+        self.calculateYearlyRevenueRating()
+        self.calculateQuarterlyEarningsRating()
+        self.calculateYearlyEarningsRating()
+        self.setBuyRating()
+        self.setPeRating()
         self.setDividendYieldRating()
         self.setPayoutRatioRating()
         self.setReturnOnEquityRating()
-        self.getPriceRating()
+        self.updateAllData()
+
+    def setPeRating(self):
+        peRating = self.calculatePeRating()
+        self.keyData['peRating'] = peRating
+
+    def setDividendYieldRating(self):
+        dividendYieldRating = self.calculateDividendYieldRating()
+        self.keyData['dividendYieldRating'] = dividendYieldRating
+
+    def setPayoutRatioRating(self):
+        payoutRatioRating = self.calculatePayoutRatioRating()
+        self.keyData['payoutRatioRating'] = payoutRatioRating
+
+    def setReturnOnEquityRating(self):
+        returnOnEquityRating = self.calculateReturnOnEquityRating()
+        self.keyData['returnOnEquityRating'] = returnOnEquityRating
+
+    def calculateYearlyRevenueRating(self):
+        yearlyRevenueTendency = self.keyData['yearlyRevenueTendency']
+        yearlyRevenueRating = self.calculateGrowthRating(yearlyRevenueTendency)
+        self.keyData['revenueYearlyRating'] = yearlyRevenueRating
+
+    def calculateQuarterlyEarningsRating(self):
+        quarterlyEarningsTendency = self.keyData['quarterlyEarningsTendency']
+        earningsQuarterlyRating = self.calculateGrowthRating(quarterlyEarningsTendency)
+        self.keyData['earningsQuarterlyRating'] = earningsQuarterlyRating
+
+    def calculateYearlyEarningsRating(self):
+        yearlyEarningsTendency = self.keyData['yearlyEarningsTendency']
+        earningsYearlyRating = self.calculateGrowthRating(yearlyEarningsTendency)
+        self.keyData['earningsYearlyRating'] = earningsYearlyRating
+
+    def updateAllData(self):
+        self.allData['keyData'] = self.keyData
+
 
     def calculatePeRating(self):
         jsonData = self.jsonDataDetail
@@ -41,7 +81,7 @@ class RatingManager(object):
         return 0
 
 
-    def calculatePriceRating(self, price, fiftyTwoWeekHigh):
+    def calculateBuyRating(self, price, fiftyTwoWeekHigh):
         priceBelowHighRate_10 = 0.5
         priceBelowHighRate_9 = 0.45
         priceBelowHighRate_8 = 0.4
@@ -93,30 +133,31 @@ class RatingManager(object):
         return 5
 
 
-    def getPriceRating(self):
+    def setBuyRating(self):
 
+        stockSymbol = self.keyData['stockSymbol']
         price = self.jsonDataDetail['price']['regularMarketPrice']['raw']
-        fiftyTwoWeekHigh = self.jsonDataDetail['quoteData'][self.stockSymbol]['fiftyTwoWeekHigh']['raw']
-        fiftyTwoWeekHigh = self.jsonDataDetail['quoteData'][self.stockSymbol]['fiftyTwoWeekHigh']['raw']
-        priceRating = self.calculatePriceRating(price, fiftyTwoWeekHigh)
-        return priceRating
+        fiftyTwoWeekHigh = self.jsonDataDetail['quoteData'][stockSymbol]['fiftyTwoWeekHigh']['raw']
+        fiftyTwoWeekHigh = self.jsonDataDetail['quoteData'][stockSymbol]['fiftyTwoWeekHigh']['raw']
+        buyRating = self.calculateBuyRating(price, fiftyTwoWeekHigh)
+        self.keyData['buyRating'] = buyRating
 
-    def setDividendYieldRating(self):
-        dividendYield = self.getDividendYield()
+    def calculateDividendYieldRating(self):
+        dividendYield = self.keyData['dividendYield']
         if dividendYield > 0.01 and dividendYield < 0.05:
             return "😃"
         else:
             return "🙁"
 
-    def setPayoutRatioRating(self):
+    def calculatePayoutRatioRating(self):
         payoutRatio =  self.jsonDataDetail['summaryDetail']['payoutRatio']['raw']
         if payoutRatio < 0.6:
             return "😃"
         else:
             return "🙁"
 
-    def setReturnOnEquityRating(self):
-        returnOnEquity = self.getReturnOnEquity()
+    def calculateReturnOnEquityRating(self):
+        returnOnEquity = self.keyData['returnOnEquity']
         if returnOnEquity > 0.1:
             return "😃"
         else:

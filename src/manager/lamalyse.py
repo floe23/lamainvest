@@ -44,7 +44,7 @@ class Lamalyse(object):
     def getData(self,stock):
         allData = self.getDataFromApi(stock)
         allData = self.setCalculatedValues(allData)
-        # keyData = self.setRatings(keyData)
+        allData = self.setRatings(allData)
         return allData
 
     def setKeyData(self,data):
@@ -55,8 +55,10 @@ class Lamalyse(object):
         allData = calculationManager.allData
         return allData
 
-    def setRatings(self,data):
-        return data
+    def setRatings(self,allData):
+        ratingManager = RatingManager(allData)
+        allData = ratingManager.allData
+        return allData
 
     def getDataFromApi(self,stock):
         for i in range(0,5):

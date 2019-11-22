@@ -42,13 +42,13 @@ def test_setCalculatedValues(startClass):
     assert keyData['stockPriceThreeYearChange'] == 0.8
     assert keyData['stockPriceOneYearChange'] == -0.13
 # #
-# def test_setRatings(startClass):
-#     keyData = startClass.dataList[0]
-#     assert keyData['revenueYearlyRating'] == 6
-#     assert keyData['earningsYearlyRating'] == 7
-#     assert keyData['earningsQuarterlyRating'] == 8
-#     assert keyData['buyRating'] == 3
-#     assert keyData['peRating'] == 7
-#     assert keyData['dividendYieldRating'] == "😃"
-#     assert keyData['payoutRatioRating'] == "😃"
-#     assert keyData['returnOnEquityRating'] == "😃"
+def test_setRatings(startClass):
+    keyData = startClass.dataList[0]['keyData']
+    assert keyData['revenueYearlyRating'] == 6
+    assert keyData['earningsQuarterlyRating'] == 8
+    assert keyData['earningsYearlyRating'] == 7
+    assert keyData['buyRating'] == 3
+    assert keyData['peRating'] == 7
+    assert keyData['dividendYieldRating'] == "😃"
+    assert keyData['payoutRatioRating'] == "😃"
+    assert keyData['returnOnEquityRating'] == "😃"
