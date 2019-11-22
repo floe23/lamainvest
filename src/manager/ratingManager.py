@@ -21,6 +21,8 @@ class RatingManager(object):
         self.setDividendYieldRating()
         self.setPayoutRatioRating()
         self.setReturnOnEquityRating()
+        self.setTotalRating()
+        self.setbuySuggestion()
         self.updateAllData()
 
     def setPeRating(self):
@@ -176,3 +178,21 @@ class RatingManager(object):
             return 3
         else:
             return 0
+
+    def setTotalRating(self):
+        allRatings = [
+            self.keyData['revenueYearlyRating'],
+            self.keyData['earningsQuarterlyRating'],
+            self.keyData['earningsYearlyRating'],
+            self.keyData['peRating'],
+            self.keyData['returnOnEquityRating'],
+        ]
+        sumRating = sum(allRatings)
+        totalRating = sumRating/len(allRatings)
+        totalRating = round(totalRating,0)
+        self.keyData['totalRating'] = totalRating
+
+    def setbuySuggestion(self):
+        price = self.keyData['price'] * 0.6
+        buySuggestion = round(price, 1)
+        self.keyData['buySuggestion'] = buySuggestion
