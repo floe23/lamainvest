@@ -9,11 +9,14 @@ class YahooJsonManager(object):
     def __init__(self):
         self.apiManager = ApiManager()
 
-    def getStockInfo(self,stockSymbol):
-        self.setStock(stockSymbol)
-        self.getJson()
-        data = self.getKeyData()
-        return data
+    def getStockInfo(self,usersInput):
+        stockSymbol = self.validaUsersInput(usersInput)
+        if stockSymbol:
+            self.setStock(stockSymbol)
+            self.getJson()
+            data = self.getKeyData()
+            return data
+        return False
 
     def setStock(self,stockSymbol):
         self.stockSymbol = stockSymbol
@@ -24,15 +27,16 @@ class YahooJsonManager(object):
             self.jsonDataDetail = self.getTestJsonDetail()
             self.jsonDataDetailHistory = self.getTestJsonHistory()
         else:
-            self.validaUsersInput()
-
-    def validaUsersInput(self):
-        stockSymbol = self.stockSymbol
-        autoCompleteResponse = self.apiManager.getYahooAutoComplete(stockSymbol)
-        if autoCompleteResponse:
-            stockSymbol = autoCompleteResponse['ResultSet']['Result'][0]['symbol']
             self.jsonDataDetail = self.apiManager.getYahooStockDetail(stockSymbol)
             self.jsonDataDetailHistory = self.apiManager.getYahooStockHistory(stockSymbol)
+
+    def validaUsersInput(self,usersInput):
+        autoCompleteResponse = self.apiManager.getYahooAutoComplete(usersInput)
+        print(autoCompleteResponse)
+        if len(autoCompleteResponse['ResultSet']['Result']) > 0:
+            stockSymbol = autoCompleteResponse['ResultSet']['Result'][0]['symbol']
+            return stockSymbol
+        return False
 
     def getTestJsonAutoComplete(self):
         with open('src/test/testDataAutoComplete_AAPL.json', 'r') as myfile:

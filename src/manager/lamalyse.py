@@ -27,28 +27,33 @@ class Lamalyse(object):
         self.yahooJsonManager = YahooJsonManager()
         self.yahooJsonManager.debug = self.debug
         dataList = []
+        failList = []
         data = []
         counter = 0
         max = len(stockSymbolList)
         for stock in stockSymbolList:
-            stock = stock.upper()
+            # stock = stock.upper()
             counter = counter + 1
             printMsg = "{0}/{1}".format(counter,max)
             data = self.getData(stock)
             if data:
                 dataList.append(data)
+            else:
+                failList.append(stock)
         self.dataJsonYahooInfo = data
         self.dataList = dataList
-        return dataList
+        self.failList = failList
 
     def getData(self,stock):
         allData = self.getDataFromApi(stock)
-        try:
-            allData = self.setCalculatedValues(allData)
-            allData = self.setRatings(allData)
-        except Exception as e:
-            print("error:",e)
-        return allData
+        if allData:
+            try:
+                allData = self.setCalculatedValues(allData)
+                allData = self.setRatings(allData)
+            except Exception as e:
+                print("error:",e)
+            return allData
+        return False
 
     def setKeyData(self,data):
         return data
