@@ -43,8 +43,11 @@ class Lamalyse(object):
 
     def getData(self,stock):
         allData = self.getDataFromApi(stock)
-        allData = self.setCalculatedValues(allData)
-        allData = self.setRatings(allData)
+        try:
+            allData = self.setCalculatedValues(allData)
+            allData = self.setRatings(allData)
+        except Exception as e:
+            print("error:",e)
         return allData
 
     def setKeyData(self,data):
@@ -61,7 +64,7 @@ class Lamalyse(object):
         return allData
 
     def getDataFromApi(self,stock):
-        for i in range(0,5):
+        for i in range(0,3):
             try:
                 print("get data for:", stock)
                 data = self.yahooJsonManager.getStockInfo(stock)
@@ -82,12 +85,12 @@ class Lamalyse(object):
         jsonDataList = self.dataList
         dataList = []
         keys = []
-        for key in jsonDataList[0].keys():
+        for key in jsonDataList[0]['keyData'].keys():
             keys.append(key)
         dataList.append(keys)
         for jsonData in jsonDataList:
             dataValues = []
-            for dataValue in jsonData.values():
+            for dataValue in jsonData['keyData'].values():
                 if not isinstance(dataValue, str):
                     dataValue = round(dataValue,2)
                 dataValues.append(dataValue)

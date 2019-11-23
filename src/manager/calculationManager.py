@@ -26,8 +26,9 @@ class CalculationManager(object):
 
     def setPriceMaxHigh(self):
         stockPriceList = self.jsonDataDetailHistory['chart']['result'][0]['indicators']['adjclose'][0]['adjclose']
-        priceMaxHigh = max(stockPriceList)
-        self.keyData['priceMaxHigh'] = priceMaxHigh
+        if stockPriceList:
+            priceMaxHigh = max(stockPriceList)
+            self.keyData['priceMaxHigh'] = priceMaxHigh
 
     def calculateGrowthSlope(self,mylist):
 
