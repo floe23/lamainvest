@@ -10,7 +10,7 @@ def simpleClass():
     return startClass
 
 def test_checkInputWorking(simpleClass):
-    input = 'Apple'
+    input = 'aapl'
     simpleClass.getYahooDataInfo([input])
     keyData = simpleClass.dataList[0]['keyData']
     assert keyData['shortName'] == 'Apple Inc.'
