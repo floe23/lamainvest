@@ -1,0 +1,79 @@
+{
+  "ResultSet": {
+    "Query": "APPLE",
+    "Result": [
+      {
+        "symbol": "AAPL",
+        "name": "Apple Inc.",
+        "exch": "NAS",
+        "type": "S",
+        "exchDisp": "NASDAQ",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "APLE",
+        "name": "Apple Hospitality REIT, Inc.",
+        "exch": "NYQ",
+        "type": "S",
+        "exchDisp": "NYSE",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "APRU",
+        "name": "Apple Rush Company, Inc.",
+        "exch": "PNK",
+        "type": "S",
+        "exchDisp": "OTC Markets",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "APPLX",
+        "name": "Appleseed Fund Investor Share",
+        "exch": "NAS",
+        "type": "M",
+        "exchDisp": "NASDAQ",
+        "typeDisp": "Fund"
+      },
+      {
+        "symbol": "APPIX",
+        "name": "Appleseed Fund Institutional Share",
+        "exch": "NAS",
+        "type": "M",
+        "exchDisp": "NASDAQ",
+        "typeDisp": "Fund"
+      },
+      {
+        "symbol": "^VXAPL",
+        "name": "CBOE EQUITY VIXON APPLE",
+        "exch": "WCB",
+        "type": "I",
+        "exchDisp": "Chicago Board Options Exchange",
+        "typeDisp": "Index"
+      },
+      {
+        "symbol": "GAPJ",
+        "name": "Golden Apple Oil & Gas Inc.",
+        "exch": "PNK",
+        "type": "S",
+        "exchDisp": "OTC Markets",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "AAPL.MX",
+        "name": "Apple Inc.",
+        "exch": "MEX",
+        "type": "S",
+        "exchDisp": "Mexico",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "AAPL.BA",
+        "name": "Apple Inc.",
+        "exch": "BUE",
+        "type": "S",
+        "exchDisp": "Buenos Aires",
+        "typeDisp": "Equity"
+      }
+    ]
+  }
+}

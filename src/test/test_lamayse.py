@@ -17,6 +17,13 @@ def startClass():
     startClass.getYahooDataInfo(['AAPL'])
     return startClass
 
+@pytest.fixture
+def simpleClass():
+    startClass = Lamalyse()
+    startClass.debug = True
+    return startClass
+
+
 #comment this for not exeeding limit by testing
 # def test_getJson(startClass):
 #     startClass.getJson()
@@ -54,3 +61,16 @@ def test_setRatings(startClass):
     assert keyData['returnOnEquityRating'] == 6
     assert keyData['totalRating'] == 7
     assert keyData['buySuggestion'] == 116.5
+
+def test_checkInputWorking(simpleClass):
+    input = 'Apple'
+    simpleClass.getYahooDataInfo([input])
+    keyData = simpleClass.dataList[0]['keyData']
+    assert keyData['shortName'] == 'Apple Inc.'
+
+
+# def test_checkInputFail(simpleClass):
+#     input = '1st Class'
+#     simpleClass.getYahooDataInfo([input])
+#     failList = simpleClass.failList
+#     assert failList[0] == input

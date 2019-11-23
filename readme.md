@@ -9,6 +9,9 @@ the credentials for the google sheet you find in credentials
 Testing:
 there is one script for analysing the detail and one for the history which are the main two yahoo finance function
 
+all the tests run in test/test_lamayse.py
+the slow test where api access is needed run in test/test_lamayse_slow.py
+
 
 keyData is not implemented for history yet
 change api key
@@ -36,6 +39,8 @@ check etf
 do check of 1000 companies
 create big scv to anylize with pandas
 calculate price to buy
+improve api ApiManager
+test csv creator
 
 
 questions to answer

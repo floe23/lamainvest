@@ -6,6 +6,9 @@ class YahooJsonManager(object):
 
     debug = True
 
+    def __init__(self):
+        self.apiManager = ApiManager()
+
     def getStockInfo(self,stockSymbol):
         self.setStock(stockSymbol)
         self.getJson()
@@ -16,14 +19,26 @@ class YahooJsonManager(object):
         self.stockSymbol = stockSymbol
 
     def getJson(self):
-        apiManager = ApiManager()
-        stockSymbol = self.stockSymbol
         if self.debug:
+            self.jsonDataAutoComplete = self.getTestJsonAutoComplete()
             self.jsonDataDetail = self.getTestJsonDetail()
             self.jsonDataDetailHistory = self.getTestJsonHistory()
         else:
-            self.jsonDataDetail = apiManager.getYahooStockDetail(stockSymbol)
-            self.jsonDataDetailHistory = apiManager.getYahooStockHistory(stockSymbol)
+            self.validaUsersInput()
+
+    def validaUsersInput(self):
+        stockSymbol = self.stockSymbol
+        autoCompleteResponse = self.apiManager.getYahooAutoComplete(stockSymbol)
+        if autoCompleteResponse:
+            stockSymbol = autoCompleteResponse['ResultSet']['Result'][0]['symbol']
+            self.jsonDataDetail = self.apiManager.getYahooStockDetail(stockSymbol)
+            self.jsonDataDetailHistory = self.apiManager.getYahooStockHistory(stockSymbol)
+
+    def getTestJsonAutoComplete(self):
+        with open('src/test/testDataAutoComplete_AAPL.json', 'r') as myfile:
+            testJson=myfile.read()
+        testJson = json.loads(testJson)
+        return testJson
 
     def getTestJsonDetail(self):
         with open('src/test/testDataDetail_AAPL.json', 'r') as myfile:
@@ -36,10 +51,6 @@ class YahooJsonManager(object):
             testJson=myfile.read()
         testJson = json.loads(testJson)
         return testJson
-
-
-
-
 
     def getDividendYield(self):
         try:

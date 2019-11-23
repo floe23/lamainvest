@@ -64,15 +64,17 @@ class Lamalyse(object):
         return allData
 
     def getDataFromApi(self,stock):
-        for i in range(0,3):
-            try:
-                print("get data for:", stock)
-                data = self.yahooJsonManager.getStockInfo(stock)
-                return data
-            except Exception as e:
-                print("error:", e)
-                print("try again:", stock)
-        return False
+        # for i in range(0,3):
+        #     try:
+        #         print("get data for:", stock)
+        #         data = self.yahooJsonManager.getStockInfo(stock)
+        #         return data
+        #     except Exception as e:
+        #         print("error:", e)
+        #         print("try again:", stock)
+        print("get data for:", stock)
+        data = self.yahooJsonManager.getStockInfo(stock)
+        return data
 
     def writeDataToCsv(self):
         dataList = self.createDataValueList()

@@ -1,0 +1,79 @@
+{
+  "ResultSet": {
+    "Query": "3M",
+    "Result": [
+      {
+        "symbol": "MMM.TI",
+        "name": "3M",
+        "exch": "TLO",
+        "type": "S",
+        "exchDisp": "TLX Exchange",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "MMM",
+        "name": "3M Company",
+        "exch": "NYQ",
+        "type": "S",
+        "exchDisp": "NYSE",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "MMM.SW",
+        "name": "3M Company",
+        "exch": "YHD",
+        "type": "S",
+        "exchDisp": "Industry",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "3MINDIA.NS",
+        "name": "3M India Limited",
+        "exch": "NSI",
+        "type": "S",
+        "exchDisp": "NSE",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "3MU.BE",
+        "name": "MANITOU B.F. SA INH. EO 1",
+        "exch": "BER",
+        "type": "S",
+        "exchDisp": "Berlin",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "MMM.HM",
+        "name": "3M CO.  DL-,01",
+        "exch": "HAM",
+        "type": "S",
+        "exchDisp": "Hamburg",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "3MU.F",
+        "name": "Manitou BF SA",
+        "exch": "FRA",
+        "type": "S",
+        "exchDisp": "Frankfurt",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "3MG.SG",
+        "name": "SJM Holdings Ltd. Registered Sh",
+        "exch": "STU",
+        "type": "S",
+        "exchDisp": "Stuttgart",
+        "typeDisp": "Equity"
+      },
+      {
+        "symbol": "MMMC34.SA",
+        "name": "3M Company",
+        "exch": "SAO",
+        "type": "S",
+        "exchDisp": "Sao Paolo",
+        "typeDisp": "Equity"
+      }
+    ]
+  }
+}
