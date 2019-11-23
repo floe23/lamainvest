@@ -43,6 +43,7 @@ class Lamalyse(object):
         self.dataJsonYahooInfo = data
         self.dataList = dataList
         self.failList = failList
+        print(self.failList)
 
     def getData(self,stock):
         allData = self.getDataFromApi(stock)

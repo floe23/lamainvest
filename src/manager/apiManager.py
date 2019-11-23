@@ -23,7 +23,7 @@ class ApiManager(object):
 
         response = json.loads(response.text)
         # print(response)
-        self.writeJsonTofile("auto-complete",query,response)
+        # self.writeJsonTofile("auto-complete",query,response)
         return response
 
     def getYahooStockHistory(self,stockSymbol):

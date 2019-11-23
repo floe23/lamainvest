@@ -22,6 +22,7 @@ class YahooJsonManager(object):
         self.stockSymbol = stockSymbol
 
     def getJson(self):
+        stockSymbol = self.stockSymbol
         if self.debug:
             self.jsonDataAutoComplete = self.getTestJsonAutoComplete()
             self.jsonDataDetail = self.getTestJsonDetail()
@@ -32,7 +33,6 @@ class YahooJsonManager(object):
 
     def validaUsersInput(self,usersInput):
         autoCompleteResponse = self.apiManager.getYahooAutoComplete(usersInput)
-        print(autoCompleteResponse)
         if len(autoCompleteResponse['ResultSet']['Result']) > 0:
             stockSymbol = autoCompleteResponse['ResultSet']['Result'][0]['symbol']
             return stockSymbol
