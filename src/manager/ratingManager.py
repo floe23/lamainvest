@@ -140,7 +140,6 @@ class RatingManager(object):
         stockSymbol = self.keyData['stockSymbol']
         price = self.jsonDataDetail['price']['regularMarketPrice']['raw']
         fiftyTwoWeekHigh = self.jsonDataDetail['quoteData'][stockSymbol]['fiftyTwoWeekHigh']['raw']
-        fiftyTwoWeekHigh = self.jsonDataDetail['quoteData'][stockSymbol]['fiftyTwoWeekHigh']['raw']
         buyRating = self.calculateBuyRating(price, fiftyTwoWeekHigh)
         self.keyData['buyRating'] = buyRating
 
@@ -193,6 +192,8 @@ class RatingManager(object):
         self.keyData['totalRating'] = totalRating
 
     def setbuySuggestion(self):
-        price = self.keyData['price'] * 0.6
-        buySuggestion = round(price, 1)
+        stockSymbol = self.keyData['stockSymbol']
+        fiftyTwoWeekHigh = self.jsonDataDetail['quoteData'][stockSymbol]['fiftyTwoWeekHigh']['raw']
+        buySuggestion = fiftyTwoWeekHigh * 0.6
+        buySuggestion = round(buySuggestion, 1)
         self.keyData['buySuggestion'] = buySuggestion

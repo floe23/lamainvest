@@ -35,6 +35,7 @@ class Lamalyse(object):
             # stock = stock.upper()
             counter = counter + 1
             printMsg = "{0}/{1}".format(counter,max)
+            print(printMsg)
             data = self.getData(stock)
             if data:
                 dataList.append(data)

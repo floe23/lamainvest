@@ -10,13 +10,18 @@ class YahooJsonManager(object):
         self.apiManager = ApiManager()
 
     def getStockInfo(self,usersInput):
-        stockSymbol = self.validaUsersInput(usersInput)
-        if stockSymbol:
-            self.setStock(stockSymbol)
-            self.getJson()
-            data = self.getKeyData()
-            return data
-        return False
+        try:
+            stockSymbol = self.validaUsersInput(usersInput)
+            if stockSymbol:
+                self.setStock(stockSymbol)
+                self.getJson()
+                data = self.getKeyData()
+                return data
+            else:
+                return False
+        except:
+            print("error for", usersInput)
+            return False
 
     def setStock(self,stockSymbol):
         self.stockSymbol = stockSymbol
