@@ -8,7 +8,7 @@ Go to rapid  [https://rapidapi.com/apidojo/api/yahoo-finance1](api yahoo finance
 git clone https://github.com/floe23/lamainvest.git
 cd lamainvest
 pip install -r requirements.txt
-python start_lamalyse.py
+python start_lamainvest.py
 ```
 
 You have to run it from the root
