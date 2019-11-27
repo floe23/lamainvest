@@ -1,0 +1,97 @@
+#defaultKeyStatistics profitMargins
+#defaultKeyStatistics sharesOutstanding
+#defaultKeyStatistics 52WeekChange
+#recommendationTrend trend [0]
+#financialData returnOnEquity raw
+
+
+interesting?
+defaultKeyStatistics
+    sharesShortPriorMonth
+    fiveYearAverageReturn
+    morningStarRiskRating
+    revenueQuarterlyGrowth
+    annualReportExpenseRatio
+    lastDividendValue
+    SandP52WeekChange
+    threeYearAverageReturn
+    morningStarOverallRating
+    earningsQuarterlyGrowth
+    priceToSalesTrailing12Months
+    sharesShortPriorMonth
+    fiveYearAverageReturn
+
+recommendationTrend
+
+"earnings":{
+  "earningsDate":[
+
+  ],
+  "earningsAverage":{
+  "raw":0,
+  "fmt":"0.00"
+  },
+  "earningsLow":{
+  "raw":-0.08,
+  "fmt":"-0.08"
+  },
+  "earningsHigh":{
+  "raw":0.05,
+  "fmt":"0.05"
+  },
+  "revenueAverage":{
+  "raw":70040000,
+  "fmt":"70.04M",
+  "longFmt":"70,040,000"
+  },
+  "revenueLow":{
+  "raw":65000000,
+  "fmt":"65M",
+  "longFmt":"65,000,000"
+  },
+  "revenueHigh":{
+  "raw":77840000,
+  "fmt":"77.84M",
+  "longFmt":"77,840,000"
+  }
+  },
+
+  price
+  netSharePurchaseActivity
+  financialData
+
+  quoteType market
+
+  calendarEvents
+
+  summaryDetail
+
+
+  get-histories chart result [0] meta firstTradeDate
+
+
+  price regularMarketPrice
+
+
+  revenue and earnings (yearly)
+
+    earnings financialsChart yearly
+      date
+      revenue raw
+      earnings raw
+
+    revenue and earnings (quarterly)
+
+      earnings earningsChart
+
+    Jo.
+    https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.lstsq.html
+    https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyfit.html
+    Je nachdem ob Du das als lineares Gleichungssystem siehst (erster Link, unten ist ein Beispiel) oder als Polynom ersten Gerades (zweiter link np.polifit(x,y,1)
+
+    Wenn Du das graphisch Zeichnen willst ist das zweite einfacher. Wenn Du ohne grafisch zu zeichnen nur den Trend haben willst wäre es das erste und Du guckst nur, ob im Beispiel m<>0 ist
+    Also wenn Du es mathematisch ordentlich haben möchtest
+
+
+
+PeRating
