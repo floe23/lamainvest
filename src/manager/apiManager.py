@@ -1,8 +1,10 @@
 import json
 import requests
 import time
+from src.settings import *
 
 class ApiManager(object):
+    RAPIDAPIKEY = RAPIDAPIKEY
     def writeJsonTofile(self,type,stockSymbol,data):
         epoch_time = int(time.time())
         # jsonFilePath = 'test/jsonYahooData{0}_{1}_{2}.json'.format(type,stockSymbol,epoch_time)
@@ -17,7 +19,7 @@ class ApiManager(object):
         response = requests.get(getUrl,
                         headers={
                         "X-RapidAPI-Host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-                        "X-RapidAPI-Key": "54d4520c5amshddd4bfc35653a2dp191ce6jsnb2e1d3da103e"
+                        "X-RapidAPI-Key": self.RAPIDAPIKEY
                         }
                     )
 
@@ -32,7 +34,7 @@ class ApiManager(object):
         response = requests.get(getUrl,
                         headers={
                         "X-RapidAPI-Host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-                        "X-RapidAPI-Key": "54d4520c5amshddd4bfc35653a2dp191ce6jsnb2e1d3da103e"
+                        "X-RapidAPI-Key": self.RAPIDAPIKEY
                         }
                     )
 
@@ -46,7 +48,7 @@ class ApiManager(object):
         response = requests.get(getUrl,
                         headers={
                         "X-RapidAPI-Host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-                        "X-RapidAPI-Key": "54d4520c5amshddd4bfc35653a2dp191ce6jsnb2e1d3da103e"
+                        "X-RapidAPI-Key": self.RAPIDAPIKEY
                         }
                     )
 

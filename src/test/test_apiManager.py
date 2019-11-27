@@ -1,5 +1,5 @@
 import pytest
-from manager.apiManager import ApiManager
+from src.manager.apiManager import ApiManager
 
 @pytest.fixture
 def startClass():
