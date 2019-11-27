@@ -1,4 +1,7 @@
-#Lamalyse
+# Lamalyse
+
+## About
+This project is basically about learning programming. But learning programming just like that is boring. So lets earn some money on the way :) The goal ist to display the top 5 Stocks and top 5 ETF's of the day. The idea is to buy them at a point where they are in a price low. For getting this information we will analyse thousands of Stocks and ETF's and get the results on a daily base. Later we can go for results by our or even by minute.  
 
 ## Installation
 
@@ -8,20 +11,28 @@ Go to rapid  [https://rapidapi.com/apidojo/api/yahoo-finance1](api yahoo finance
 git clone https://github.com/floe23/lamainvest.git
 cd lamainvest
 pip install -r requirements.txt
-python start_lamainvest.py
 ```
 
-You have to run it from the root
+## How to start  
+`python start_lamainvest.py`
 
+
+## Notes
+First I implemented a google sheet manager, but the api was very slow, so for now
 The googleSheetManager enters you data on a google spreadsheet
 the credentials for the google sheet you find in credentials
 
 
-Testing:
-there is one script for analysing the detail and one for the history which are the main two yahoo finance function
+## Testing:
+there is one script for analysing the detail and one for the history which are the main two yahoo finance functions
 
-all the tests run in test/test_lamayse.py
-the slow test where api access is needed run in test/test_lamayse_slow.py
+Testing on the hightest level you do via
+`pytest test/test_lamainvest.py`
+all these tests here run without real api calls, instead with the data of json files
+for real api testing we go for
+`pytest test/test_lamainvest_slow.py`
+other test files you find in src/test
+The tests have to be run from root
 
 
 keyData is not implemented for history yet

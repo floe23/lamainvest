@@ -1,7 +1,7 @@
 import socket
 from src.settings import allStocks, debug
 
-from src.manager.lamalyse import Lamalyse
+from src.manager.lamainvest import Lamalyse
 
 analyser = Lamalyse()
 analyser.debug = debug

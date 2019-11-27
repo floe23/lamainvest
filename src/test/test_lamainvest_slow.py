@@ -1,5 +1,5 @@
 import pytest
-from src.manager.lamalyse import Lamalyse
+from src.manager.lamainvest import Lamalyse
 import json
 
 
