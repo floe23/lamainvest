@@ -41,6 +41,15 @@ create big scv to anylize with pandas
 calculate price to buy
 improve api ApiManager
 test csv creator
+Rating:
+  value earnings, revenue and dividend yield higher
+  negative stock price developement should be part of ratings
+Add news for 5 top dividend stocks  
+only display 5 top dividend stocks
+write blog ?
+  freecodecamp.org  
+
+
 
 
 questions to answer
@@ -74,3 +83,7 @@ dividendYieldRating --> basically how much dividends are payed, if the price goe
 payoutRatioRating --> relation of earnings and dividends, should be lower then 60% if the payout ratio goes close to 100% the company is not able to do any investements anymore
 returnOnEquityRating --> it tells you how much profit the company does with the shareholders equity, how much profit does the company makes per, the roe should be constantly high, check double digits
 ROIC = net (income - dividends) / total capital
+
+
+how to use:
+add a file in
