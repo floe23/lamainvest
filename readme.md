@@ -44,6 +44,10 @@ test csv creator
 Rating:
   value earnings, revenue and dividend yield higher
   negative stock price developement should be part of ratings
+Add news for 5 top dividend stocks  
+only display 5 top dividend stocks
+write blog ?
+
 
 
 questions to answer
