@@ -1,3 +1,14 @@
+#Lamalyse
+
+## Installation
+
+Create a file src/settings.py
+Go to rapid  [https://rapidapi.com/apidojo/api/yahoo-finance1](api yahoo finance)
+```
+pip install -r requirements.txt
+python start_lamalyse.py
+```
+
 for starting you run start_lamalyse.py
 you have to run it from the root
 The main file is Lamalyse
