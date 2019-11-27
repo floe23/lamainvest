@@ -2,16 +2,16 @@
 
 ## Installation
 
-Create a file src/settings.py
+Create a file src/settings.py you can take src/settings_example.py as an example or just rename it
 Go to rapid  [https://rapidapi.com/apidojo/api/yahoo-finance1](api yahoo finance)
 ```
+git clone https://github.com/floe23/lamainvest.git
+cd lamainvest
 pip install -r requirements.txt
 python start_lamalyse.py
 ```
 
-for starting you run start_lamalyse.py
-you have to run it from the root
-The main file is Lamalyse
+You have to run it from the root
 
 The googleSheetManager enters you data on a google spreadsheet
 the credentials for the google sheet you find in credentials
