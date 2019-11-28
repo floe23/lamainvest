@@ -18,6 +18,37 @@ pip install -r requirements.txt
 There will be a csv file generated you find in src/data.csv
 You can import this csv in Excel or a google sheet if you like an analyse it
 
+Stock example json:
+```
+newJsonData = {
+        'totalRating' : 0,
+        'buyRating' : 0,
+        'buySuggestion' : 0,
+        'shortName' : 0,
+        'dividendYieldRating' : 0,
+        'stockPriceFiveYearChange' : 0,
+        'stockPriceThreeYearChange' : 0,
+        'stockPriceOneYearChange' : 0,
+        'earningsYearlyRating' : 0,
+        'earningsQuarterlyRating' : 0,
+        'peRating' : 0,
+        'payoutRatioRating' : 0,
+        'returnOnEquityRating' : 0,
+        'revenueYearlyRating' : 0,
+        'price' : 0,
+        'stockSymbol' : 0,
+        'returnOnEquity' : 0,
+        'dividendYield' : 0,
+        'priceToEarnings' : 0,
+        'payoutRatio' : 0,
+        'yearlyRevenueTendency' : 0,
+        'yearlyEarningsTendency' : 0,
+        'quarterlyEarningsTendency' : 0,
+        'priceMax' : 0,
+    }
+```
+
+
 ## Notes
 First I implemented a google sheet manager, but the api was very slow, so for now
 The googleSheetManager enters you data on a google spreadsheet
