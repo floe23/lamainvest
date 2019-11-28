@@ -15,7 +15,8 @@ pip install -r requirements.txt
 
 ## How to start  
 `python start_lamainvest.py`
-
+There will be a csv file generated you find in src/data.csv
+You can import this csv in Excel or a google sheet if you like an analyse it
 
 ## Notes
 First I implemented a google sheet manager, but the api was very slow, so for now
@@ -35,32 +36,14 @@ other test files you find in src/test
 The tests have to be run from root
 
 
-keyData is not implemented for history yet
-change api key
-
-test_yahooJsonManager
-
-test_apiManager
-
-
-google sheet for testing is:
-
-https://docs.google.com/spreadsheets/d/1OeHKTNaILDhxKtBjxPUjetWIe_fima1dj-PGf_a_AMw/edit#gid=1440500008
-
-
-Todo:
-remove hard codedd api keys or move them to gitignore file  
+## Todo:
 
 create csv with date
 last 5 year growth  
-api host and api key to constructor
-call one etf and get the data
 format output
 summerize ratings   
 check etf  
 do check of 1000 companies
-create big scv to anylize with pandas
-calculate price to buy
 improve api ApiManager
 test csv creator
 Rating:
@@ -68,44 +51,20 @@ Rating:
   negative stock price developement should be part of ratings
 Add news for 5 top dividend stocks  
 only display 5 top dividend stocks
-write blog ?
-  freecodecamp.org  
-
-
-
-
-questions to answer
-what is the revenue in 4 years?
-getEarningsListYearlyTendency
-
-what is the earnings in 4 years?
-getEarningsListYearlyTendency
-
+write blog article  freecodecamp.org  
+call one etf and get the data
+more interesting stocks  
+check all etfs  
 differ between small and big companies? use a percentage?
-
-
+decisiont tree
 ai to predict course?
+Display graphs
+automatic news for the stocks
 
 
-Display graphs?
-
-Roadmap:
-decisiont tree?
-etf  
-
-Set realistic buy price for limit order
-Summery of some ratings   
-
-
-Check every morning for pice calculateGrowthSum
-
-Rating Key Words:
+## Background Knoledge
 peRating --> the time it needs to get your money back
 dividendYieldRating --> basically how much dividends are payed, if the price goes down the dividen yield goes up, so its difficult to say, it should be between 2% and 5%
 payoutRatioRating --> relation of earnings and dividends, should be lower then 60% if the payout ratio goes close to 100% the company is not able to do any investements anymore
 returnOnEquityRating --> it tells you how much profit the company does with the shareholders equity, how much profit does the company makes per, the roe should be constantly high, check double digits
 ROIC = net (income - dividends) / total capital
-
-
-how to use:
-add a file in
